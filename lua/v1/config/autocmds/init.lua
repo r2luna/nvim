@@ -1,0 +1,6 @@
+require("v1.config.autocmds.highlight_on_yank")
+require("v1.config.autocmds.autosave")
+require("v1.config.autocmds.autoformat")
+require("v1.config.autocmds.lastpos")
+require("v1.config.autocmds.dont_auto_comment_new_line")
+require("v1.config.autocmds.trim_whitespace")

@@ -1,0 +1,28 @@
+{
+    "runtime.version": "LuaJIT",
+    "runtime.path": [
+        "lua/?.lua",
+        "lua/?/init.lua"
+    ],
+    "runtime.special": {
+        "vim.g": "setglobal",
+        "vim.b": "setglobal",
+        "vim.w": "setglobal",
+        "vim.t": "setglobal"
+    },
+    "diagnostics.globals": [
+        "vim"
+    ],
+    "diagnostics.disable": [
+        "undefined-global",
+        "param-type-mismatch",
+        "assign-type-mismatch",
+        "undefined-doc-name"
+    ],
+    "workspace.library": [
+        "${3rd}/luv/library",
+        "${3rd}/busted/library"
+    ],
+    "workspace.checkThirdParty": false,
+    "completion.callSnippet": "Replace"
+}
