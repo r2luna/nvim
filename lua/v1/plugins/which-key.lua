@@ -25,6 +25,7 @@ return { -- Useful plugin to show you pending keybinds.
       { "<leader>g", group = "[G]it" },
       { "<leader>m", group = "[M]arkdown" },
       { "<leader>o", group = "[O]bsidian" },
+      { "<leader>p", group = "[P]HP" },
       { "<leader>w", group = "[W]orkspace" },
       { "<leader>u", group = "[U]i" },
       { "<leader>t", group = "[T]ests" },
