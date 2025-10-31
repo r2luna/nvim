@@ -8,5 +8,8 @@ return {
   },
   opts = {
     kinds = false,
+    theme = {
+      normal = { bg = "#101010" },
+    },
   },
 }

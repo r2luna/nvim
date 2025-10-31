@@ -56,13 +56,13 @@ return {
     signature = { enabled = true },
 
     sources = {
-      default = {
-        "lsp",
-        -- "path",
-        "snippets",
-        -- "buffer",
+      default = { "lsp", "snippets" },
+      per_filetype = {
+        sql = { "snippets", "dadbod", "buffer" },
       },
+      -- add vim-dadbod-completion to your completion providers
       providers = {
+        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         copilot = {
           enabled = function()
             return vim.g.copilot_completion_enabled

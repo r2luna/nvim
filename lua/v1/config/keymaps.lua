@@ -137,6 +137,11 @@ vim.keymap.set("n", "<leader>ff", function()
 end, { desc = "[F]ind [F]iles" })
 -------------------
 
+-- Search livewire bolt files easily
+vim.keymap.set("n", "<leader>fl", function()
+  fzf.files({ query = "⚡️" })
+end, { desc = "[F]ind [L]ivewire ⚡️ Files" })
+
 vim.keymap.set("n", "<leader>fc", function()
   fzf.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind Neovim [C]onfig files" })

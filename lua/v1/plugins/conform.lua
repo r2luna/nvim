@@ -34,8 +34,11 @@ return {
     },
 
     formatters_by_ft = {
+      -- XML
+      xml = { "xlmformat" },
+
       -- Go
-      -- go = { "goimports", "gofmt" },
+      go = { "goimports", "gofmt" },
 
       -- Lua
       lua = { "stylua" },
@@ -71,8 +74,8 @@ return {
       lsp_format = "fallback",
     },
     format_on_save = {
-        timeout_ms = 1000,
-        lsp_format = "fallback",
+      timeout_ms = 1000,
+      lsp_format = "fallback",
     },
   },
   init = function()
