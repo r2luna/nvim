@@ -121,3 +121,9 @@ function Find:icons()
     vim.cmd("Nerdy")
   end
 end
+
+function Find:notifications()
+  return function()
+    require("telescope").extensions.notify.notify()
+  end
+end

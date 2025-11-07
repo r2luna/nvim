@@ -1,5 +1,6 @@
 return {
   "ellisonleao/glow.nvim",
+  enable = false,
   config = true,
   cmd = "Glow",
   keys = { { "<leader>mg", "<cmd>Glow<cr>", desc = "[M]arkdown [G]low Preview" } },

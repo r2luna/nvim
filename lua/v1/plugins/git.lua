@@ -58,7 +58,6 @@ return {
           row = 0,
           col = 1,
         },
-        -- yadm = { enable = false },
 
         on_attach = function(bufnr)
           vim.keymap.set(
@@ -145,11 +144,11 @@ return {
       },
     },
   },
-  {
-    "sindrets/diffview.nvim",
-    event = "VeryLazy",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-  },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   event = "VeryLazy",
+  --   cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+  -- },
   {
     "kdheepak/lazygit.nvim",
     lazy = true,
@@ -164,8 +163,8 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
   },
   -- Git related plugins
   "tpope/vim-fugitive",

@@ -32,8 +32,6 @@ require("lazy").setup({
 require("v1.config.options")
 require("v1.config.commands")
 require("v1.config.keymaps")
-require("v1.config.keymaps_obsidian")
-require("v1.config.keymaps_markdown")
 require("v1.config.lsp")
 require("v1.snippets")
 require("v1.config.autocmds")

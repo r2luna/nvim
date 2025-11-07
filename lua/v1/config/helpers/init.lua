@@ -4,6 +4,7 @@ require("v1.config.helpers.find")
 require("v1.config.helpers.lsp")
 require("v1.config.helpers.ui")
 require("v1.config.helpers.diagnostics")
+require("v1.config.helpers.markdown")
 
 ---@class Key
 ---@field key string

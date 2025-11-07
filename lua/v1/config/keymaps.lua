@@ -1,29 +1,8 @@
 require("v1.config.helpers.init")
 
--- ------------------------------------------------------------------------------
--- Load keys when LSP is attached
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("keymaps-lsp-attach", { clear = true }),
-  callback = function()
-    local keys = {
-      Key:new("gd", "n", "[G]oto [D]efinition(s)", LSP:definitions()),
-      Key:new("gr", "n", "[G]oto [R]eference(s)", LSP:references()),
-      Key:new("gI", "n", "[G]oto [I]mplementation(s)", LSP:implementations()),
-      Key:new("gD", "n", "[G]oto [D]eclaration", LSP:declaration()),
-      Key:new("<leader>D", "n", "Type [D]efinition", LSP:type_definition()),
-      Key:new("<leader>cr", "n", "[R]ename", LSP:rename()),
-      Key:new("<leader>ca", { "n", "x" }, "[C]ode [A]ction", LSP:code_action()),
-    }
-
-    Keymaps:load(keys)
-
-    -- Remove potential conflicts with other plugins
-    for _, keymap in ipairs({ "grr", "gra", "gri", "grn" }) do
-      pcall(vim.keymap.del, "n", keymap)
-    end
-  end,
-})
--- ------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------
+-- General Keymaps
+-- -----------------------------------------------------------------------------------------------
 
 local keys = {
 
@@ -69,6 +48,7 @@ local keys = {
   Key:new("<leader>fl", "n", "[F]ind [L]ivewire ⚡️ Files", Find:livewire_files()),
   Key:new("<leader>fc", "n", "[F]ind [C]onfig files", Find:config_files()),
   Key:new("<leader><leader>", "n", "[,] Find existing buffers", Find:buffers()),
+  Key:new("<leader>fm", "n", "[F]ind [M]essages", Find:notifications()),
 
   -- Todos
   Key:new("<leader>ft", "n", "[F]ind [T]odos, Fixmes, Hacks, ...", Find:todos()),
@@ -103,6 +83,11 @@ local keys = {
   Key:new("jk", "i", "Exit insert mode", "<ESC>", true),
   Key:new("<leader>ut", "n", "Toggle [T]wilight", UI:toggle_twilight()),
   Key:new("<leader>uw", "n", "Toggle Text [W]rap", UI:toggle_text_wrap()),
+
+  -- Obsidian Notes
+  Key:new("<leader>on", "n", "[O]bsidian [N]ew Note", Markdown:obsidian_create_note()),
+  Key:new("<leader>os", "n", "[O]bsidian [S]earch Notes", Markdown:obsidian_search()),
+  Key:new("<leader>og", "n", "[O]bsidian [G]rep Search", Markdown:obsidian_grep_search()),
 }
 
 Keymaps:load(keys)
@@ -116,3 +101,57 @@ vim.keymap.set("i", "<M-BS>", "<C-w>", { silent = true })
 -- Keep selection after indent
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+-- ------------------------------------------------------------------------------
+-- Load keys when LSP is attached
+-- ------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("keymaps-lsp-attach", { clear = true }),
+  callback = function()
+    local keys = {
+      Key:new("gd", "n", "[G]oto [D]efinition(s)", LSP:definitions()),
+      Key:new("gr", "n", "[G]oto [R]eference(s)", LSP:references()),
+      Key:new("gI", "n", "[G]oto [I]mplementation(s)", LSP:implementations()),
+      Key:new("gD", "n", "[G]oto [D]eclaration", LSP:declaration()),
+      Key:new("<leader>D", "n", "Type [D]efinition", LSP:type_definition()),
+      Key:new("<leader>cr", "n", "[R]ename", LSP:rename()),
+      Key:new("<leader>ca", { "n", "x" }, "[C]ode [A]ction", LSP:code_action()),
+    }
+
+    Keymaps:load(keys)
+
+    -- Remove potential conflicts with other plugins
+    for _, keymap in ipairs({ "grr", "gra", "gri", "grn" }) do
+      pcall(vim.keymap.del, "n", keymap)
+    end
+  end,
+})
+
+---------------------------------------------------------------------------------------------------
+-- Markdown / Obsidian specific keymaps
+-- Only load when a markdown file is opened
+---------------------------------------------------------------------------------------------------
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.md",
+  callback = function()
+    if Markdown:obsidian_is_inside_inbox() then
+      Keymaps:load({
+        Key:new("<leader>ok", "n", "Set Note as O[K]", Markdown:obsidian_move_to_zettelkasten()),
+      })
+    end
+
+    Keymaps:load({
+      -- Markdown
+      Key:new("<leader>mt", "n", "[M]arkdown [T]odo", Markdown:new_todo()),
+      Key:new("<leader>mn", "n", "[M]arkdown [N]ext Todo", Markdown:next_todo()),
+      Key:new("<leader>mp", "n", "[M]arkdown [P]revious Todo", Markdown:previous_todo()),
+      Key:new("<leader>or", "n", "So[R]t todo list", Markdown:sort_todos()),
+
+      -- Obsidian
+      Key:new("<leader>od", "n", "Toggle [CH]eckbox", Markdown:obsidian_toggle_checkbox()),
+      Key:new("<leader>ot", "n", "[T]able of contents", Markdown:obsidian_toc()),
+      Key:new("<leader>oa", "n", "[A]pply default template", Markdown:obsidian_template_note()),
+      Key:new("<leader>of", "n", "[F]ollow Link", Markdown:obsidian_follow_link()),
+    })
+  end,
+})
