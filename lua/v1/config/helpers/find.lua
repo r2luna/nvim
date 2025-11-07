@@ -1,129 +1,129 @@
-local fzf = require("fzf-lua")
+local telescope = require("telescope.builtin")
 
 Find = {}
 Find.__index = Find
 function Find:files()
   return function()
-    require("fzf-lua-frecency").frecency({ cwd_only = true })
+    telescope.find_files()
   end
 end
 
 function Find:livewire_files()
   return function()
-    fzf.files({ query = "⚡️" })
+    telescope.find_files({ default_text = "⚡️" })
   end
 end
 
 function Find:config_files()
   return function()
-    fzf.files({ cwd = vim.fn.stdpath("config") })
+    telescope.find_files({ cwd = vim.fn.stdpath("config") })
   end
 end
 
 function Find:todos()
   return function()
-    require("todo-comments.fzf").todo()
+    vim.cmd("TodoTelescope")
   end
 end
 
 function Find:diagnostics()
   return function()
-    fzf.diagnostics_document()
+    telescope.diagnostics()
   end
 end
 
 function Find:resume()
   return function()
-    fzf.resume()
+    telescope.resume()
   end
 end
 
 function Find:old_files()
   return function()
-    fzf.oldfiles()
+    telescope.oldfiles()
   end
 end
 
 function Find:buffers()
   return function()
-    fzf.buffers()
+    telescope.buffers()
   end
 end
 
 function Find:live_grep_curbuf()
   return function()
-    fzf.lgrep_curbuf()
+    telescope.live_grep()
   end
 end
 
 function Find:lsp_workspace_symbols()
   return function()
-    fzf.lsp_workspace_symbols()
+    telescope.lsp_workspace_symbols()
   end
 end
 
 function Find:lsp_document_symbols()
   return function()
-    fzf.lsp_document_symbols()
+    telescope.lsp_document_symbols()
   end
 end
 
 function Find:help()
   return function()
-    fzf.helptags()
+    telescope.help_tags()
   end
 end
 
 function Find:keymaps()
   return function()
-    fzf.keymaps()
+    telescope.keymaps()
   end
 end
 
 function Find:paths()
   return function()
-    vim.cmd("FzfDirectories")
+    -- vim.cmd("FzfDirectories")
   end
 end
 
 function Find:builtin()
   return function()
-    fzf.builtin()
+    telescope.builtin()
   end
 end
 
 function Find:current_word()
   return function()
-    fzf.grep_cword()
+    telescope.grep_string()
   end
 end
 
 function Find:current_WORD()
   return function()
-    fzf.grep_cWORD()
+    telescope.grep_string({ word_match = "-w" })
   end
 end
 
 function Find:live_grep()
   return function()
-    fzf.live_grep()
+    telescope.live_grep()
   end
 end
 
 function Find:grep()
   return function()
-    fzf.grep_project()
+    telescope.live_grep()
   end
 end
 
 function Find:icons()
   return function()
-    vim.cmd("Nerdy")
+    vim.cmd("Telescope nerdy theme=ivy")
   end
 end
 
 function Find:notifications()
   return function()
-    require("telescope").extensions.notify.notify()
+    vim.cmd("Telescope notify theme=ivy")
   end
 end

@@ -83,6 +83,7 @@ local keys = {
   Key:new("jk", "i", "Exit insert mode", "<ESC>", true),
   Key:new("<leader>ut", "n", "Toggle [T]wilight", UI:toggle_twilight()),
   Key:new("<leader>uw", "n", "Toggle Text [W]rap", UI:toggle_text_wrap()),
+  Key:new("<leader>us", "n", "Toggle [S]treamer Mode", UI:streamer_mode()),
 
   -- Obsidian Notes
   Key:new("<leader>on", "n", "[O]bsidian [N]ew Note", Markdown:obsidian_create_note()),

@@ -131,7 +131,7 @@ return {
       {
         "<leader>gb",
         function()
-          require("fzf-lua").git_branches()
+          require("telescope.builtin").git_branches()
         end,
         desc = "Checkout [b]ranch",
       },

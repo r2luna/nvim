@@ -23,3 +23,9 @@ end
 function UI:toggle_text_wrap()
   return "<cmd>set wrap!<CR>"
 end
+
+function UI:streamer_mode()
+  return function()
+    vim.cmd("CloakToggle")
+  end
+end

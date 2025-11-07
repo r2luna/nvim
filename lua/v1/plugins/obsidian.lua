@@ -39,7 +39,7 @@ return {
       },
 
       picker = {
-        name = "fzf-lua",
+        name = "telescope.nvim",
         note_mappings = {
           -- Create a new note from your query.
           new = "<C-x>",

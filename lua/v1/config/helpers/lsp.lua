@@ -1,8 +1,8 @@
 LSP = {}
 LSP.__index = LSP
 
--- LSP FZF keymaps (attach only when LSP is active)
-local function lsp_goto(method, fallback, fzf_func, msg)
+-- LSP Telescope keymaps (attach only when LSP is active)
+local function lsp_goto(method, fallback, telescope_func, msg)
   return function()
     local params = vim.lsp.util.make_position_params()
 
@@ -13,7 +13,7 @@ local function lsp_goto(method, fallback, fzf_func, msg)
       elseif #items == 1 then
         fallback(params)
       else
-        require("fzf-lua")[fzf_func]()
+        require("telescope.builtin")[telescope_func]()
       end
     end)
   end
@@ -27,7 +27,7 @@ end
 
 function LSP:references()
   return function()
-    require("fzf-lua").lsp_references()
+    require("telescope.builtin").lsp_references()
   end
 end
 
@@ -51,7 +51,7 @@ function LSP:declaration()
 end
 
 function LSP:type_definition()
-  return require("fzf-lua").lsp_typedefs
+  return require("telescope.builtin").lsp_type_definitions
 end
 
 function LSP:rename()

@@ -13,5 +13,7 @@ return {
       opts.title = opts.title or "Notification"
       require("notify")(msg, level, opts)
     end
+
+    require("telescope").load_extension("notify")
   end,
 }

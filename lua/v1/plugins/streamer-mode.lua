@@ -24,7 +24,4 @@ return {
       },
     },
   },
-  keymaps = {
-    { "<leader>us", "<cmd>CloakToggle<CR>", desc = "Toggle [S]treamer Mode" },
-  },
 }

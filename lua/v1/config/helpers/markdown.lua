@@ -514,16 +514,16 @@ end
 
 function Markdown:obsidian_search()
   return function()
-    require("fzf-lua").files({
+    require("telescope.builtin").find_files({
       cwd = obsidian_vault,
-      fd_opts = "--exclude .obsidian --exclude .git",
+      find_command = { "fd", "--type", "f", "--exclude", ".obsidian", "--exclude", ".git" },
     })
   end
 end
 
 function Markdown:obsidian_grep_search()
   return function()
-    require("fzf-lua").grep_project({
+    require("telescope.builtin").live_grep({
       cwd = obsidian_vault,
     })
   end
