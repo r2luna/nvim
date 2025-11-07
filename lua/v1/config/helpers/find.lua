@@ -5,7 +5,7 @@ Find = {}
 Find.__index = Find
 function Find:files()
   return function()
-    telescope.oldfiles(themes.get_ivy())
+    telescope.find_files(themes.get_ivy())
   end
 end
 
@@ -41,7 +41,7 @@ end
 
 function Find:old_files()
   return function()
-    telescope.oldfiles(themes.get_ivy())
+    telescope.oldfiles(themes.get_ivy({ cwd_only = true }))
   end
 end
 
