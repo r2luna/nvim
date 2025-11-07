@@ -1,22 +1,23 @@
 local telescope = require("telescope.builtin")
+local themes = require("telescope.themes")
 
 Find = {}
 Find.__index = Find
 function Find:files()
   return function()
-    telescope.find_files()
+    telescope.find_files(themes.get_ivy())
   end
 end
 
 function Find:livewire_files()
   return function()
-    telescope.find_files({ default_text = "⚡️" })
+    telescope.find_files(themes.get_ivy({ default_text = "⚡️" }))
   end
 end
 
 function Find:config_files()
   return function()
-    telescope.find_files({ cwd = vim.fn.stdpath("config") })
+    telescope.find_files(themes.get_ivy({ cwd = vim.fn.stdpath("config") }))
   end
 end
 
@@ -28,55 +29,55 @@ end
 
 function Find:diagnostics()
   return function()
-    telescope.diagnostics()
+    telescope.diagnostics(themes.get_ivy())
   end
 end
 
 function Find:resume()
   return function()
-    telescope.resume()
+    telescope.resume(themes.get_ivy())
   end
 end
 
 function Find:old_files()
   return function()
-    telescope.oldfiles()
+    telescope.oldfiles(themes.get_ivy())
   end
 end
 
 function Find:buffers()
   return function()
-    telescope.buffers()
+    telescope.buffers(themes.get_ivy())
   end
 end
 
 function Find:live_grep_curbuf()
   return function()
-    telescope.live_grep()
+    telescope.live_grep(themes.get_ivy())
   end
 end
 
 function Find:lsp_workspace_symbols()
   return function()
-    telescope.lsp_workspace_symbols()
+    telescope.lsp_workspace_symbols(themes.get_ivy())
   end
 end
 
 function Find:lsp_document_symbols()
   return function()
-    telescope.lsp_document_symbols()
+    telescope.lsp_document_symbols(themes.get_ivy())
   end
 end
 
 function Find:help()
   return function()
-    telescope.help_tags()
+    telescope.help_tags(themes.get_ivy())
   end
 end
 
 function Find:keymaps()
   return function()
-    telescope.keymaps()
+    telescope.keymaps(themes.get_ivy())
   end
 end
 
@@ -88,31 +89,31 @@ end
 
 function Find:builtin()
   return function()
-    telescope.builtin()
+    telescope.builtin(themes.get_ivy())
   end
 end
 
 function Find:current_word()
   return function()
-    telescope.grep_string()
+    telescope.grep_string(themes.get_ivy())
   end
 end
 
 function Find:current_WORD()
   return function()
-    telescope.grep_string({ word_match = "-w" })
+    telescope.grep_string(themes.get_ivy({ word_match = "-w" }))
   end
 end
 
 function Find:live_grep()
   return function()
-    telescope.live_grep()
+    telescope.live_grep(themes.get_ivy())
   end
 end
 
 function Find:grep()
   return function()
-    telescope.live_grep()
+    telescope.live_grep(themes.get_ivy())
   end
 end
 
