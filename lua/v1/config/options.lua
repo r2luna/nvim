@@ -21,7 +21,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Show line under cursor
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 -- Show column of cursor cursor
 -- vim.opt.cursorcolumn = true
 

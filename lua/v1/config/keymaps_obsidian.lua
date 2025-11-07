@@ -47,32 +47,24 @@ local function find_obsidian_folder(project_path, vault_path)
   local home_path = os.getenv("HOME")
   local code_path = home_path .. "/Documents/code"
 
-  print("DEBUG: home_path = " .. home_path)
-  print("DEBUG: code_path = " .. code_path)
-  print("DEBUG: project_path = " .. project_path)
-
   -- Only apply path matching if we're inside ~/Documents/code directory
   local start_pos = string.find(project_path, code_path, 1, true)
-  print("DEBUG: start_pos = " .. tostring(start_pos))
 
   if not start_pos then
-    print("DEBUG: Not in code path, returning inbox")
     return vault_path .. "/inbox"
   end
 
   -- Extract the relative path from ~/Documents/code
   local relative_path = string.sub(project_path, #code_path + 2) -- +2 to skip the trailing slash
-  print("DEBUG: relative_path = " .. relative_path)
 
   -- If we're exactly at ~/Documents/code, use inbox
   if relative_path == "" then
-    print("DEBUG: Empty relative path, returning inbox")
     return vault_path .. "/inbox"
   end
 
   -- Return the mirrored path in vault/code
   local result = vault_path .. "/code/" .. relative_path
-  print("DEBUG: returning " .. result)
+
   return result
 end
 
@@ -126,8 +118,6 @@ local function create_obsidian_note()
   else
     target_folder = find_obsidian_folder(project_path, vault_path)
   end
-  print("Target folder: " .. target_folder)
-  print("Project path: " .. project_path)
 
   local title = vim.fn.input("Note title: ")
   if not title or title == "" then
@@ -141,9 +131,7 @@ local function create_obsidian_note()
 
   -- Create directories if needed
   local dir_to_create = vim.fn.fnamemodify(note_path, ":h")
-  print("Creating directory: " .. dir_to_create)
   local mkdir_result = vim.fn.mkdir(dir_to_create, "p")
-  print("mkdir result: " .. mkdir_result)
 
   -- Check if we're inside the obsidian vault
   local is_in_vault = string.find(project_path, vault_path, 1, true)

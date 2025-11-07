@@ -5,17 +5,17 @@ return {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      {
-        "j-hui/fidget.nvim",
-        enabled = true,
-        opts = {
-          notification = {
-            override_vim_notify = true,
-          },
-        },
-      },
-
-      { "nvim-mini/mini.notify", version = false, opts = {} },
+      -- {
+      --   "j-hui/fidget.nvim",
+      --   enabled = false,
+      --   opts = {
+      --     notification = {
+      --       override_vim_notify = true,
+      --     },
+      --   },
+      -- },
+      --
+      -- { "nvim-mini/mini.notify", version = false, opts = {} },
       "saghen/blink.cmp",
     },
     config = function()
@@ -203,7 +203,11 @@ return {
       --    :Mason
       --
       --  You can press `g?` for help in this menu.
-      require("mason").setup()
+      require("mason").setup({
+        ui = {
+          border = "rounded",
+        },
+      })
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
@@ -227,10 +231,12 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
+
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
             -- Desabilitar formatação do LSP para evitar conflito com conform
             server.capabilities.documentFormattingProvider = false
             server.capabilities.documentRangeFormattingProvider = false
@@ -255,29 +261,9 @@ return {
       },
     },
   },
-  -- Rustacean vim for all our Rust needs
-  -- INFO: We can't install rust-analyzer via Mason, as this will conflict with
-  -- rustaceanvim. Therefore ensure it is installed manually for example using
-  -- rustup and available in the path. This has the added benefit, of having
-  -- the rust-analyzer in the version fitting our current rust installation:
-  --
-  -- ```shell
-  -- rustup component add rust-analyzer
-  -- ```
-  {
-    "mrcjkb/rustaceanvim",
-    version = "^5", -- Recommended
-    lazy = false, -- This plugin is already lazy
-    config = function()
-      vim.g.rustaceanvim = {
-        tools = {
-          float_win_config = {
-            border = "rounded",
-          },
-        },
-      }
-    end,
-  },
+
+  -- ------------------------------------------------------------------------------
+  -- Laravel LSP Support
   {
     "adibhanna/laravel.nvim",
     enabled = true,

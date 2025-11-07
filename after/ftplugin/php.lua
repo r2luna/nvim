@@ -30,8 +30,6 @@ function M.open_test_file()
     test_file = project_root .. "/tests/Feature/" .. test_path .. "Test.php"
   end
 
-  print("Looking for test file: " .. test_file)
-
   -- Open test file
   if vim.fn.filereadable(test_file) == 1 then
     vim.cmd("edit " .. test_file)

@@ -1,21 +1,17 @@
 return {
   "rcarriga/nvim-notify",
-  config = function()
-    require("notify").setup({
-      render = "compact",
-      timeout = 3000,
-      background_colour = "#000000",
-    })
-    local banned_messages = { "No information available" }
-    vim.notify = function(msg, ...)
-      for _, banned in ipairs(banned_messages) do
-        if msg == banned then
-          return
-        end
-      end
-      return require("notify")(msg, ...)
-    end
+  opts = {
+    render = "compact",
+    timeout = 3000,
+    background_colour = "#101010",
+    stages = "fade_in_slide_out",
+  },
 
-    -- vim.keymap.set("n", "<leader>n", require("telescope").extensions.notify.notify)
+  init = function()
+    vim.notify = function(msg, level, opts)
+      opts = opts or {}
+      opts.title = opts.title or "Notification"
+      require("notify")(msg, level, opts)
+    end
   end,
 }

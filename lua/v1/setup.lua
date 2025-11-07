@@ -23,6 +23,9 @@ require("lazy").setup({
   spec = {
     { import = "v1.plugins" },
   },
+  ui = {
+    border = "rounded",
+  },
 })
 
 -- Loading additional configs

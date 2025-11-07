@@ -1,5 +1,6 @@
 return {
   "LostbBlizzard/lazysql.nvim",
+  enabled = false,
   opts = {}, -- automatically calls `require("lazysql").setup()`
   dependencies = {
     "MunifTanjim/nui.nvim",

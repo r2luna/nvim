@@ -4,10 +4,6 @@ return {
   version = "*",
   build = "cargo +nightly build --release",
 
-  dependencies = {
-    "giuxtaposition/blink-cmp-copilot",
-  },
-
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
@@ -18,6 +14,7 @@ return {
     keymap = {
       preset = "default",
       ["<C-k>"] = { "select_and_accept" },
+      ["<C-l>"] = { "select_and_accept" },
       ["<C-y>"] = {}, -- desabilita o atalho antigo
       -- Map C-Z in conjunction with C-Y for completion, as we are on a QWRTZ
       -- keyboard.
@@ -56,23 +53,7 @@ return {
     signature = { enabled = true },
 
     sources = {
-      default = { "lsp", "snippets" },
-      per_filetype = {
-        sql = { "snippets", "dadbod", "buffer" },
-      },
-      -- add vim-dadbod-completion to your completion providers
-      providers = {
-        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-        copilot = {
-          enabled = function()
-            return vim.g.copilot_completion_enabled
-          end,
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          should_show_items = true,
-        },
-      },
+      default = { "lsp", "snippets", "buffer" },
     },
   },
 
