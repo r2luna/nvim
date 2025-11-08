@@ -17,6 +17,7 @@ return { -- Useful plugin to show you pending keybinds.
     },
     -- Document existing key chains
     spec = {
+      { "<space>", group = "Harpoon" },
       { "<leader>a", group = "[A]i" },
       { "<leader>c", group = "[C]ode", mode = { "n", "x" } },
       { "<leader>d", group = "[D]ocument" },

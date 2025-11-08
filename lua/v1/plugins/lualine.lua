@@ -1,25 +1,3 @@
--- Used for shortening Mode in smaller terminals
-local lualine_trunc_margin = 80
-
-local function truncateCondition()
-  return vim.o.columns >= lualine_trunc_margin
-end
-
-local mode_map = {
-  ["NORMAL"] = "N",
-  ["INSERT"] = "I",
-  ["VISUAL"] = "V",
-  ["V-LINE"] = "VL",
-  ["V-BLOCK"] = "VB",
-  ["COMMAND"] = "C",
-  ["TERMINAL"] = "T",
-  ["REPLACE"] = "R",
-}
-
-local function formatMode(str)
-  return mode_map[str] or str
-end
-
 return {
   {
     "nvim-lualine/lualine.nvim",

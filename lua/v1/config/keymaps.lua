@@ -89,6 +89,17 @@ local keys = {
   Key:new("<leader>on", "n", "[O]bsidian [N]ew Note", Markdown:obsidian_create_note()),
   Key:new("<leader>os", "n", "[O]bsidian [S]earch Notes", Markdown:obsidian_search()),
   Key:new("<leader>og", "n", "[O]bsidian [G]rep Search", Markdown:obsidian_grep_search()),
+
+  -- Harpoon
+  Key:new("<space>j", "n", "[H]arpoon [P]revious", Harpoon:prev()),
+  Key:new("<space>k", "n", "[H]arpoon [N]ext", Harpoon:next()),
+  Key:new("<space>l", "n", "[H]arpoon [L]ist", Harpoon:list()),
+  Key:new("<space>a", "n", "[H]arpoon [A]dd", Harpoon:add()),
+  Key:new("<space>q", "n", "[H]arpoon [S]elect", Harpoon:select(1)),
+  Key:new("<space>w", "n", "[H]arpoon [2]nd Select", Harpoon:select(2)),
+  Key:new("<space>e", "n", "[H]arpoon [3]rd Select", Harpoon:select(3)),
+  Key:new("<space>r", "n", "[H]arpoon [4]th Select", Harpoon:select(4)),
+  Key:new("<space>t", "n", "[H]arpoon [5]th Select", Harpoon:select(5)),
 }
 
 Keymaps:load(keys)

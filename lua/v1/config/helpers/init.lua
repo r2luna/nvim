@@ -5,6 +5,7 @@ require("v1.config.helpers.lsp")
 require("v1.config.helpers.ui")
 require("v1.config.helpers.diagnostics")
 require("v1.config.helpers.markdown")
+require("v1.config.helpers.harpoon")
 
 ---@class Key
 ---@field key string

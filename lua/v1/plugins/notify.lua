@@ -1,3 +1,10 @@
+-- -----------------------------------------------------------------------------
+-- Render Markdown
+-- https://github.com/MeanderingProgrammer/render-markdown.nvim
+-- Render Markdown is a Neovim plugin that provides a simple way to render
+-- Markdown files in Neovim.
+-- -----------------------------------------------------------------------------
+
 return {
   "rcarriga/nvim-notify",
   opts = {

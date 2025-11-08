@@ -1,3 +1,10 @@
+-- -----------------------------------------------------------------------------
+-- Barbecue
+-- https://github.com/utilyre/barbecue.nvim
+-- Barbecue is a Neovim plugin that provides a simple way to manage your project
+-- structure.
+-- -----------------------------------------------------------------------------
+
 return {
   "utilyre/barbecue.nvim",
   name = "barbecue",
