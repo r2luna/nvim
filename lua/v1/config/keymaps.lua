@@ -120,17 +120,17 @@ vim.keymap.set("v", ">", ">gv")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("keymaps-lsp-attach", { clear = true }),
   callback = function()
-    local keys = {
+    local lsp_keys = {
       Key:new("gd", "n", "[G]oto [D]efinition(s)", LSP:definitions()),
+      Key:new("gD", "n", "[G]oto [D]eclaration", LSP:declaration()),
       Key:new("gr", "n", "[G]oto [R]eference(s)", LSP:references()),
       Key:new("gI", "n", "[G]oto [I]mplementation(s)", LSP:implementations()),
-      Key:new("gD", "n", "[G]oto [D]eclaration", LSP:declaration()),
       Key:new("<leader>D", "n", "Type [D]efinition", LSP:type_definition()),
       Key:new("<leader>cr", "n", "[R]ename", LSP:rename()),
       Key:new("<leader>ca", { "n", "x" }, "[C]ode [A]ction", LSP:code_action()),
     }
 
-    Keymaps:load(keys)
+    Keymaps:load(lsp_keys)
 
     -- Remove potential conflicts with other plugins
     for _, keymap in ipairs({ "grr", "gra", "gri", "grn" }) do
