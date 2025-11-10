@@ -535,13 +535,13 @@ function Markdown:obsidian_toggle_checkbox()
   end
 end
 
-function Markdown:obsidian_table_of_contents()
+function Markdown:obsidian_toc()
   return function()
     vim.cmd("Obsidian toc")
   end
 end
 
-function Markdown:obsidian_apply_template()
+function Markdown:obsidian_template_note()
   return function()
     vim.cmd("Obsidian template note")
   end
