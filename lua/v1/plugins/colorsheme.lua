@@ -15,8 +15,43 @@ return {
           strings = false,
           variables = false,
         },
-      })
+        overrides = {},
+        palette_overrides = {
+          orange = "#ff7a8f",
+          orangeLight = "#ff7a8f",
+          purple = "#ff7a8f",
 
+          green = "#B5B5B5",
+          greenLight = "#B5B5B5",
+          -- green = "#7ddfc0",
+          -- greenLight = "#7ddfc0",
+
+          red = "#FFCFA8",
+          redDark = "#FFCFA8",
+
+          white = "#e8e0d8",
+          fg = "#e8e0d8",
+          fgAlt = "#f0e8e0",
+          fgCommand = "#f0e8e0",
+          fgInactive = "#8a7a75",
+
+          -- ui colors
+          -- greenLight = mix("#99FFE4", "#000000", math.abs(0.85)),
+          -- red = "#FF8080",
+          -- purple = "#FFCFA8",
+          -- redDark = "#FF8080",
+          -- orange = "#FFCFA8",
+          -- primary = "#A0A0A0",
+          -- comment = mix("#8b8b8b", "#000000", math.abs(0.90)),
+          -- orangeLight = "#FFCFA8",
+          -- green = mix("#99FFE4", "#000000", math.abs(0.85)),
+          -- yellowDark = "#FFC799",
+          -- purpleDark = mix("#65737E", "#000000", math.abs(0.80)),
+          -- symbol = "#65737E",
+          -- secondary = "#FFFFFF",
+          -- terminalbrightblack = "#343434",
+        },
+      })
       vim.cmd("colorscheme vesper")
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

@@ -23,7 +23,7 @@ end
 
 function Find:todos()
   return function()
-    vim.cmd("TodoTelescope")
+    require("telescope").extensions["todo-comments"].todo(themes.get_ivy())
   end
 end
 
