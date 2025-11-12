@@ -50,7 +50,12 @@ return {
       },
     },
 
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = {
+        border = "rounded",
+      },
+    },
 
     sources = {
       default = { "lsp", "snippets", "buffer" },

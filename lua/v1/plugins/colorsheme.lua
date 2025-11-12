@@ -54,8 +54,9 @@ return {
       })
       vim.cmd("colorscheme vesper")
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-      vim.api.nvim_set_hl(1, "FloatBorder", { bg = white })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#101010" })
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#e8e0d8", bg = "#101010" })
+      vim.api.nvim_set_hl(0, "FloatTitle", { fg = "#e8e0d8", bg = "#101010", bold = true })
     end,
   },
 

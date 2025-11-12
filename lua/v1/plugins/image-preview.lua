@@ -23,7 +23,7 @@ return {
     config = function()
       require("image").setup({
         backend = "kitty",
-        kitty_method = "normal",
+        kitty_method = "unicode-placeholders",
         integrations = {
           -- Notice these are the settings for markdown files
           markdown = {
