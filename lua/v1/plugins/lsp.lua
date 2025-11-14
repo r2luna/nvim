@@ -163,9 +163,6 @@ return {
           },
         },
 
-        -- Markdown
-        marksman = {},
-
         ts_ls = {},
         -- TOML
         taplo = {},
