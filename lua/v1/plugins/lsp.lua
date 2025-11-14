@@ -5,28 +5,12 @@ return {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      -- {
-      --   "j-hui/fidget.nvim",
-      --   enabled = false,
-      --   opts = {
-      --     notification = {
-      --       override_vim_notify = true,
-      --     },
-      --   },
-      -- },
-      --
-      -- { "nvim-mini/mini.notify", version = false, opts = {} },
       "saghen/blink.cmp",
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
@@ -49,16 +33,6 @@ return {
                 vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
               end,
             })
-          end
-
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            vim.keymap.set("n", "<leader>uh", function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-            end, { desc = "Toggle [U]i Inlay [H]ints" })
           end
         end,
       })
@@ -134,61 +108,35 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
         gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
         sqlls = {},
-
         lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = "Replace",
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               diagnostics = { disable = { "missing-fields" } },
             },
           },
         },
-
         ts_ls = {},
-        -- TOML
+        -- ts_ls = {},
         taplo = {},
-        -- PHP
         intelephense = {},
-        -- phpactor = {},
-        -- Bash/Shell
         shellcheck = {},
         bashls = {},
-        -- Docker
         dockerls = {},
         docker_compose_language_service = {},
-        -- Helm
         helm_ls = {},
-        -- JSON
         yamlls = {
-          -- FIXME: yamlls produces a lot of false positives for helm files
-          -- due to template syntax at the moment. It is loaded nevertheless.
-          -- Therefore we need to ensure it is not attached for those files
+          -- Detach yamlls from Helm template files to avoid false positives
           filetypes = { "yaml" },
           on_attach = function(client, bufnr)
-            local patterns = { "*/templates/*.yaml", "*/templates/*.tpl", "values.yaml", "Chart.yaml" }
+            local patterns = { "*/templates/.*%.yaml$", "*/templates/.*%.tpl$", "values%.yaml$", "Chart%.yaml$" }
             local fname = vim.fn.expand("%:p")
             for _, pattern in ipairs(patterns) do
-              local lua_pattern = pattern:gsub("*", ".*"):gsub("/", "/.*")
-              if fname:match(lua_pattern) then
+              if fname:match(pattern) then
                 vim.lsp.buf_detach_client(bufnr, client.id)
                 return
               end
@@ -196,13 +144,7 @@ return {
           end,
         },
         jsonls = {},
-
-        -- PlatformIO
         clangd = {},
-
-        -- Rust
-        -- Handled by rustacean.vim
-        -- rust_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
