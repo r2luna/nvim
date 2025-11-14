@@ -4,7 +4,7 @@ require("v1.config.helpers.init")
 -- General Keymaps
 -- -----------------------------------------------------------------------------------------------
 
-local keys = {
+Keymaps:load({
 
   -- Diagnostics
   Key:new("gl", "n", "Show Diagnostic", Diagnostics:show()),
@@ -100,9 +100,7 @@ local keys = {
   Key:new("<space>e", "n", "[H]arpoon [3]rd Select", Harpoon:select(3)),
   Key:new("<space>r", "n", "[H]arpoon [4]th Select", Harpoon:select(4)),
   Key:new("<space>t", "n", "[H]arpoon [5]th Select", Harpoon:select(5)),
-}
-
-Keymaps:load(keys)
+})
 
 -- Delete word in insert/visual mode
 for _, mode in ipairs({ "i", "x" }) do
@@ -119,8 +117,8 @@ vim.keymap.set("v", ">", ">gv")
 -- ------------------------------------------------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("keymaps-lsp-attach", { clear = true }),
-  callback = function()
-    local lsp_keys = {
+  callback = function(event)
+    Keymaps:load({
       Key:new("gd", "n", "[G]oto [D]efinition(s)", LSP:definitions()),
       Key:new("gD", "n", "[G]oto [D]eclaration", LSP:declaration()),
       Key:new("gr", "n", "[G]oto [R]eference(s)", LSP:references()),
@@ -128,9 +126,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       Key:new("<leader>D", "n", "Type [D]efinition", LSP:type_definition()),
       Key:new("<leader>cr", "n", "[R]ename", LSP:rename()),
       Key:new("<leader>ca", { "n", "x" }, "[C]ode [A]ction", LSP:code_action()),
-    }
+    })
 
-    Keymaps:load(lsp_keys)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+      Keymaps:load({
+        Key:new("<leader>uh", "n", "Toggle [U]i Inlay [H]ints", LSP:toggle_hint(event)),
+      })
+    end
 
     -- Remove potential conflicts with other plugins
     for _, keymap in ipairs({ "grr", "gra", "gri", "grn" }) do

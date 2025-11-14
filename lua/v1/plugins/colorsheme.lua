@@ -34,25 +34,10 @@ return {
           fgAlt = "#f0e8e0",
           fgCommand = "#f0e8e0",
           fgInactive = "#8a7a75",
-
-          -- ui colors
-          -- greenLight = mix("#99FFE4", "#000000", math.abs(0.85)),
-          -- red = "#FF8080",
-          -- purple = "#FFCFA8",
-          -- redDark = "#FF8080",
-          -- orange = "#FFCFA8",
-          -- primary = "#A0A0A0",
-          -- comment = mix("#8b8b8b", "#000000", math.abs(0.90)),
-          -- orangeLight = "#FFCFA8",
-          -- green = mix("#99FFE4", "#000000", math.abs(0.85)),
-          -- yellowDark = "#FFC799",
-          -- purpleDark = mix("#65737E", "#000000", math.abs(0.80)),
-          -- symbol = "#65737E",
-          -- secondary = "#FFFFFF",
-          -- terminalbrightblack = "#343434",
         },
       })
       vim.cmd("colorscheme vesper")
+
       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#101010" })
       vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#e8e0d8", bg = "#101010" })

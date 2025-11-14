@@ -21,12 +21,16 @@ return {
         },
       },
 
-      disable_frontmatter = true,
+      frontmatter = {
+        enabled = true,
+      },
+
       templates = {
         subdir = "templates",
         date_format = "%Y-%m-%d",
         time_format = "%H:%M:%S",
       },
+
       notes_subdir = "inbox",
 
       completion = {

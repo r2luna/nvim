@@ -254,13 +254,13 @@ function Markdown:sort_todos()
       end
     end
 
-    -- Clean up excessive blank lines (more than 2 consecutive)
+    -- Clean up excessive blank lines (more than 1 consecutive)
     local cleaned_result = {}
     local blank_count = 0
     for _, line in ipairs(result) do
       if line == "" or line:match("^%s*$") then
         blank_count = blank_count + 1
-        if blank_count <= 2 then
+        if blank_count <= 1 then
           table.insert(cleaned_result, line)
         end
       else
@@ -284,45 +284,47 @@ end
 -- ------------------------------------------------------------------------------
 
 function Markdown:obsidian_move_to_zettelkasten()
-  local current_file = vim.fn.expand("%:p")
-  local current_dir = vim.fn.expand("%:p:h")
-  local vault_path = vim.fn.expand(obsidian_vault)
-  local inbox_path = vault_path .. "/inbox"
-  local zettelkasten_path = vault_path .. "/zettelkasten"
+  return function()
+    local current_file = vim.fn.expand("%:p")
+    local current_dir = vim.fn.expand("%:p:h")
+    local vault_path = vim.fn.expand(obsidian_vault)
+    local inbox_path = vault_path .. "/inbox"
+    local zettelkasten_path = vault_path .. "/zettelkasten"
 
-  -- Check if current file is in inbox directory
-  if not string.find(current_dir, inbox_path, 1, true) then
-    vim.notify("This command only works within the inbox folder")
-    return
-  end
+    -- Check if current file is in inbox directory
+    if not string.find(current_dir, inbox_path, 1, true) then
+      vim.notify("This command only works within the inbox folder")
+      return
+    end
 
-  -- Check if current buffer has a file
-  if current_file == "" then
-    vim.notify("No file in current buffer")
-    return
-  end
+    -- Check if current buffer has a file
+    if current_file == "" then
+      vim.notify("No file in current buffer")
+      return
+    end
 
-  -- Get filename
-  local filename = vim.fn.fnamemodify(current_file, ":t")
-  local target_path = zettelkasten_path .. "/" .. filename
+    -- Get filename
+    local filename = vim.fn.fnamemodify(current_file, ":t")
+    local target_path = zettelkasten_path .. "/" .. filename
 
-  -- Check if target file already exists
-  if vim.fn.filereadable(target_path) == 1 then
-    vim.notify("File already exists in zettelkasten: " .. filename)
-    return
-  end
+    -- Check if target file already exists
+    if vim.fn.filereadable(target_path) == 1 then
+      vim.notify("File already exists in zettelkasten: " .. filename)
+      return
+    end
 
-  -- Create zettelkasten directory if it doesn't exist
-  vim.fn.mkdir(zettelkasten_path, "p")
+    -- Create zettelkasten directory if it doesn't exist
+    vim.fn.mkdir(zettelkasten_path, "p")
 
-  -- Move the file
-  local success = vim.fn.rename(current_file, target_path)
-  if success == 0 then
-    -- Update buffer to point to new location
-    vim.cmd("edit " .. target_path)
-    vim.notify("Moved to zettelkasten: " .. filename)
-  else
-    vim.notify("Failed to move file to zettelkasten")
+    -- Move the file
+    local success = vim.fn.rename(current_file, target_path)
+    if success == 0 then
+      -- Update buffer to point to new location
+      vim.cmd("edit " .. target_path)
+      vim.notify("Moved to zettelkasten: " .. filename)
+    else
+      vim.notify("Failed to move file to zettelkasten")
+    end
   end
 end
 
@@ -342,7 +344,9 @@ function Markdown:obsidian_setup_inbox_keymaps()
 
     if string.find(current_dir, inbox_path, 1, true) then
       Keymaps:load({
-        Key:new("<leader>ok", "n", "Set Note as O[K]", move_to_zettelkasten()),
+        Key:new("<leader>ok", "n", "Set Note as O[K]", function()
+          Markdown:obsidian_move_to_zettelkasten()
+        end),
         -- Obsidian
         Key:new("<leader>on", "n", "[O]bsidian [N]ew Note", Markdown:obsidian_create_note()),
         Key:new("<leader>os", "n", "[O]bsidian [S]earch Notes", Markdown:obsidian_search()),
@@ -455,13 +459,19 @@ local function generate_frontmatter(title, target_folder)
 
   return frontmatter
 end
+
 function Markdown:obsidian_create_note()
   return function()
     local vault_path = vim.fn.expand(obsidian_vault)
     local project_path = vim.fn.getcwd()
 
+    -- Normalize paths for comparison
+    local normalized_vault = vault_path:gsub("/+$", "")
+    local normalized_project = project_path:gsub("/+$", "")
+
     local target_folder
-    if string.find(project_path, vault_path, 1, true) then
+    -- Check if we're inside the vault directory
+    if normalized_project == normalized_vault or normalized_project:match("^" .. vim.pesc(normalized_vault) .. "/") then
       target_folder = vault_path .. "/inbox"
     else
       target_folder = find_obsidian_folder(project_path, vault_path)

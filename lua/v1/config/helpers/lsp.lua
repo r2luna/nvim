@@ -46,3 +46,11 @@ end
 function LSP:code_action()
   return vim.lsp.buf.code_action
 end
+
+function LSP:toggle_hint(event)
+  return function()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = event.buf })
+    vim.notify("LSP inlay hints " .. (not enabled and "enabled" or "disabled"))
+  end
+end
