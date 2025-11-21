@@ -30,9 +30,6 @@ return {
         color = { gui = "bold" },
       }
 
-      -- -- local colors = require("vesper.colors")
-      -- local colors = require("yukinord.colors")
-
       require("lualine").setup({
         options = {
           icons_enabled = true,
