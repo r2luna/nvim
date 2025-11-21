@@ -30,7 +30,8 @@ return {
         color = { gui = "bold" },
       }
 
-      local colors = require("vesper.colors")
+      -- -- local colors = require("vesper.colors")
+      -- local colors = require("yukinord.colors")
 
       require("lualine").setup({
         options = {
@@ -64,20 +65,20 @@ return {
               "diagnostics",
               sources = { "nvim_diagnostic" },
               symbols = { error = " ", warn = " ", info = " " },
-              diagnostics_color = {
-                color_error = { fg = colors.red },
-                color_warn = { fg = colors.yellow },
-                color_info = { fg = colors.cyan },
-              },
+              -- diagnostics_color = {
+              --   color_error = { fg = colors.red },
+              --   color_warn = { fg = colors.yellow },
+              --   color_info = { fg = colors.cyan },
+              -- },
             },
             {
               "diff",
               symbols = { added = " ", modified = " ", removed = " " },
-              diff_color = {
-                added = { fg = colors.green },
-                modified = { fg = colors.orange },
-                removed = { fg = colors.red },
-              },
+              -- diff_color = {
+              --   added = { fg = colors.green },
+              --   modified = { fg = colors.orange },
+              --   removed = { fg = colors.red },
+              -- },
             },
             "encoding",
             "fileformat",

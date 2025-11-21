@@ -6,6 +6,8 @@ return {
       pickers = {
         find_files = {
           theme = "ivy",
+          hidden = true,
+          no_ignore = false,
         },
       },
       defaults = {

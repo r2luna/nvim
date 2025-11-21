@@ -1,10 +1,9 @@
 return {
   -- -------------------------------------------------------------------------
   -- Active color scheme
-
   {
     "datsfilipe/vesper.nvim",
-    enabled = true,
+    enabled = false,
     config = function()
       require("vesper").setup({
         transparent = true,
