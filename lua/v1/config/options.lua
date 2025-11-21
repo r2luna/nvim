@@ -1,8 +1,4 @@
----- Custom options
----- Disable copilot completions by default
----- They can be enabled with <Leader>uc
---vim.g.copilot_completion_enabled = false
---vim.cmd("Copilot disable")
+vim.g.mapleader = ","
 
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 4 -- Amount to indent with << and >>
