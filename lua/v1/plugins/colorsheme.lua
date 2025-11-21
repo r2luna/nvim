@@ -2,6 +2,17 @@ return {
   -- -------------------------------------------------------------------------
   -- Active color scheme
   {
+    "r2luna/pinnord.nvim",
+    enabled = true,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme pinnord]])
+    end,
+  },
+
+  -- -------------------------------------------------------------------------
+  -- Tests color scheme
+  {
     "datsfilipe/vesper.nvim",
     enabled = false,
     config = function()
@@ -44,8 +55,6 @@ return {
     end,
   },
 
-  -- -------------------------------------------------------------------------
-  -- Tests color scheme
   {
     "catppuccin/nvim",
     enabled = false,
