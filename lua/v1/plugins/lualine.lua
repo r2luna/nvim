@@ -27,7 +27,7 @@ return {
             return "  " .. table.concat(lsps, " | ")
           end
         end,
-        color = { gui = "bold" },
+        color = {},
       }
 
       require("lualine").setup({
@@ -81,10 +81,7 @@ return {
             "fileformat",
             "filetype",
             lsp_status,
-            {
-              "location",
-              color = { bg = "NONE", gui = "bold" },
-            },
+            "location",
           },
           lualine_y = { "" },
           lualine_z = { "" },
