@@ -5,6 +5,7 @@ return {
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
   },
   config = function()
     require("obsidian").setup({
@@ -56,6 +57,14 @@ return {
           -- Insert a tag at the current location.
           insert_tag = "<C-l>",
         },
+      },
+
+      ui = {
+        enable = true,
+        update_debounce = 200,
+        max_file_length = 5000,
+        checkboxes = {},
+        bullets = {},
       },
     })
     -----------------

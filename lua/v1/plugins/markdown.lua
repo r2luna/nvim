@@ -16,6 +16,12 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
+    heading = {
+      enabled = true,
+      backgrounds = {
+        "MarkviewHeading1",
+      },
+    },
     code = {
       disable_background = true,
       highlight_inline = "Normal",
