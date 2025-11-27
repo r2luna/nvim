@@ -18,6 +18,7 @@ return {
   opts = {
     heading = {
       enabled = true,
+      width = "block",
       backgrounds = {
         "MarkviewHeading1",
       },
