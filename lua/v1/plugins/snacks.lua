@@ -2,6 +2,15 @@ return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
+    input = {
+      enabled = true,
+    },
+    picker = {
+      enabled = true,
+    },
+    terminal = {
+      enabled = true,
+    },
     indent = {
       enabled = true,
       picker = {

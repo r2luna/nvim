@@ -79,8 +79,7 @@ Keymaps:load({
   -- UI
   Key:new("<leader>uc", "n", "Toggle [C]opilot", UI:toggle_copilot()),
   Key:new("<ESC>", "n", "Clear search highlights", "<cmd>nohlsearch<CR>", true),
-  Key:new("jj", "i", "Exit insert mode", "<ESC>", true),
-  Key:new("jk", "i", "Exit insert mode", "<ESC>", true),
+
   Key:new("<leader>ut", "n", "Toggle [T]wilight", UI:toggle_twilight()),
   Key:new("<leader>uw", "n", "Toggle Text [W]rap", UI:toggle_text_wrap()),
   Key:new("<leader>us", "n", "Toggle [S]treamer Mode", UI:streamer_mode()),
@@ -107,6 +106,19 @@ for _, mode in ipairs({ "i", "x" }) do
   vim.keymap.set(mode, "<C-BS>", "<C-w>", { silent = true })
 end
 vim.keymap.set("i", "<M-BS>", "<C-w>", { silent = true })
+
+-- Exit insert mode with jj/jk, but not in input buffers (snacks, opencode, etc.)
+local excluded_filetypes = { "snacks_input", "opencode_ask", "TelescopePrompt", "fzf" }
+
+for _, keys in ipairs({ "jj", "jk" }) do
+  vim.keymap.set("i", keys, function()
+    local ft = vim.bo.filetype
+    if vim.tbl_contains(excluded_filetypes, ft) then
+      return keys
+    end
+    return "<ESC>"
+  end, { expr = true, silent = true, desc = "Exit insert mode" })
+end
 
 -- Keep selection after indent
 vim.keymap.set("v", "<", "<gv")
@@ -170,3 +182,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
     })
   end,
 })
+
+---------------------------------------------------------------------------------------------------
+-- Ai specific keymaps
+---------------------------------------------------------------------------------------------------
+Keymaps:load({
+  Key:new("<leader>ai", "n", "[A]i", AI:toggle()),
+  Key:new("<leader>aa", "n", "[A]i [A]sk", AI:ask("@this: ", {})),
+  Key:new("<leader>as", "v", "[A]i [S]election", AI:ask("@selection: ")),
+})
+
+-- Debug: Test opencode ask directly (use <leader>ad to test)
+vim.keymap.set("n", "<leader>ad", function()
+  require("opencode").ask()
+end, { desc = "[A]i [D]ebug ask" })
