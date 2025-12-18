@@ -7,6 +7,7 @@ require("v1.config.helpers.diagnostics")
 require("v1.config.helpers.markdown")
 require("v1.config.helpers.harpoon")
 require("v1.config.helpers.ai")
+require("v1.config.helpers.flash")
 
 ---@class Key
 ---@field key string

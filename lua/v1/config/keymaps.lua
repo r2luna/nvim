@@ -84,6 +84,10 @@ Keymaps:load({
   Key:new("<leader>uw", "n", "Toggle Text [W]rap", UI:toggle_text_wrap()),
   Key:new("<leader>us", "n", "Toggle [S]treamer Mode", UI:streamer_mode()),
 
+  -- Search with Flash
+  Key:new("<leader>s", { "n", "x", "o" }, "Fla[s]h", Flash:jump()),
+  Key:new("<leader>S", { "n", "x", "o" }, "Flash Tree[S]itter", Flash:treesitter()),
+
   -- Obsidian Notes
   Key:new("<leader>on", "n", "[O]bsidian [N]ew Note", Markdown:obsidian_create_note()),
   Key:new("<leader>os", "n", "[O]bsidian [S]earch Notes", Markdown:obsidian_search()),
@@ -196,3 +200,12 @@ Keymaps:load({
 vim.keymap.set("n", "<leader>ad", function()
   require("opencode").ask()
 end, { desc = "[A]i [D]ebug ask" })
+
+-- Debug: Test vim.ui.input directly (use <leader>ax to test)
+vim.keymap.set("n", "<leader>ax", function()
+  vim.ui.input({ prompt = "Test input: " }, function(input)
+    if input then
+      vim.notify("You typed: " .. input)
+    end
+  end)
+end, { desc = "[A]i test vi[X].ui.input" })

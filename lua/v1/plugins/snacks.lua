@@ -3,7 +3,7 @@ return {
   ---@type snacks.Config
   opts = {
     input = {
-      enabled = true,
+      enabled = true, -- Disabled temporarily to debug reverse typing issue
     },
     picker = {
       enabled = true,
@@ -14,7 +14,7 @@ return {
     indent = {
       enabled = true,
       picker = {
-          enabled = true
+        enabled = true,
       },
       animate = {
         enabled = false,
