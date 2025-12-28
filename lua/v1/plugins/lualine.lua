@@ -33,7 +33,38 @@ return {
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = "auto",
+          theme = {
+            normal = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+            insert = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+            visual = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+            replace = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+            command = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+            inactive = {
+              a = { bg = "NONE" },
+              b = { bg = "NONE" },
+              c = { bg = "NONE" },
+            },
+          },
           component_separators = "|",
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
