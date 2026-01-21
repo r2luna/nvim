@@ -10,7 +10,7 @@ return {
   opts = {
     render = "compact",
     timeout = 3000,
-    background_colour = "#101010",
+    background_colour = "#1a1c21",
     stages = "fade_in_slide_out",
   },
 
