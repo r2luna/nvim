@@ -8,6 +8,6 @@ return {
   dependencies = "neovim/nvim-lspconfig",
   event = "VeryLazy",
   opts = {
-    -- your options here
+    exclude_lsp_clients = { "copilot", "supermaven" },
   },
 }

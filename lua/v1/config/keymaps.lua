@@ -190,22 +190,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
 ---------------------------------------------------------------------------------------------------
 -- Ai specific keymaps
 ---------------------------------------------------------------------------------------------------
-Keymaps:load({
-  Key:new("<leader>ai", "n", "[A]i", AI:toggle()),
-  Key:new("<leader>aa", "n", "[A]i [A]sk", AI:ask("@this: ", {})),
-  Key:new("<leader>as", "v", "[A]i [S]election", AI:ask("@selection: ")),
-})
-
--- Debug: Test opencode ask directly (use <leader>ad to test)
-vim.keymap.set("n", "<leader>ad", function()
-  require("opencode").ask()
-end, { desc = "[A]i [D]ebug ask" })
-
--- Debug: Test vim.ui.input directly (use <leader>ax to test)
-vim.keymap.set("n", "<leader>ax", function()
-  vim.ui.input({ prompt = "Test input: " }, function(input)
-    if input then
-      vim.notify("You typed: " .. input)
-    end
-  end)
-end, { desc = "[A]i test vi[X].ui.input" })
+-- Keymaps:load({
+--   Key:new("<leader>ai", "n", "[A]i", AI:toggle()),
+--   Key:new("<leader>aa", "n", "[A]i [A]sk", AI:ask("@this: ", {})),
+--   Key:new("<leader>as", "v", "[A]i [S]election", AI:ask("@selection: ")),
+-- })
+--
+-- -- Debug: Test opencode ask directly (use <leader>ad to test)
+-- vim.keymap.set("n", "<leader>ad", function()
+--   require("opencode").ask()
+-- end, { desc = "[A]i [D]ebug ask" })
+--
+-- -- Debug: Test vim.ui.input directly (use <leader>ax to test)
+-- vim.keymap.set("n", "<leader>ax", function()
+--   vim.ui.input({ prompt = "Test input: " }, function(input)
+--     if input then
+--       vim.notify("You typed: " .. input)
+--     end
+--   end)
+-- end, { desc = "[A]i test vi[X].ui.input" })

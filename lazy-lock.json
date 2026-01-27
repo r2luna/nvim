@@ -45,7 +45,7 @@
   "opencode.nvim": { "branch": "main", "commit": "39a246b597d6050ca319142b5af5a8b81c74e7d9" },
   "persistence.nvim": { "branch": "main", "commit": "b20b2a7887bd39c1a356980b45e03250f3dce49c" },
   "phptools.nvim": { "branch": "main", "commit": "a69b141b1310991d22294602c711562b1257b339" },
-  "pinnord.nvim": { "branch": "main", "commit": "ebd93bfb3d1fd0c68471c597fa3ad943e050032e" },
+  "pinnord.nvim": { "branch": "main", "commit": "61c90e58d4c6dc7136bea55004c7fa5030b95f09" },
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "render-markdown.nvim": { "branch": "main", "commit": "07d088bf8bdadd159eb807b90eaee86a4778383f" },
