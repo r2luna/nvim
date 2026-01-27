@@ -11,6 +11,7 @@ return {
     "svelte",
     "html",
     "blade",
+    "php",
     "css",
     "scss",
   },
@@ -68,4 +69,3 @@ return {
   --     blink.get_lsp_capabilities()
   -- ),
 }
-
