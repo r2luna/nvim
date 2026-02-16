@@ -188,24 +188,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 ---------------------------------------------------------------------------------------------------
--- Ai specific keymaps
+-- Claude Code
 ---------------------------------------------------------------------------------------------------
--- Keymaps:load({
---   Key:new("<leader>ai", "n", "[A]i", AI:toggle()),
---   Key:new("<leader>aa", "n", "[A]i [A]sk", AI:ask("@this: ", {})),
---   Key:new("<leader>as", "v", "[A]i [S]election", AI:ask("@selection: ")),
--- })
---
--- -- Debug: Test opencode ask directly (use <leader>ad to test)
--- vim.keymap.set("n", "<leader>ad", function()
---   require("opencode").ask()
--- end, { desc = "[A]i [D]ebug ask" })
---
--- -- Debug: Test vim.ui.input directly (use <leader>ax to test)
--- vim.keymap.set("n", "<leader>ax", function()
---   vim.ui.input({ prompt = "Test input: " }, function(input)
---     if input then
---       vim.notify("You typed: " .. input)
---     end
---   end)
--- end, { desc = "[A]i test vi[X].ui.input" })
+Keymaps:load({
+  Key:new("<leader>acc", "n", "Toggle [C]laude", "<cmd>ClaudeCode<cr>", true),
+  Key:new("<leader>acf", "n", "[F]ocus Claude", "<cmd>ClaudeCodeFocus<cr>", true),
+  Key:new("<leader>acr", "n", "[R]esume Claude", "<cmd>ClaudeCode --resume<cr>", true),
+  Key:new("<leader>aco", "n", "C[O]ntinue Claude", "<cmd>ClaudeCode --continue<cr>", true),
+  Key:new("<leader>acm", "n", "Select [M]odel", "<cmd>ClaudeCodeSelectModel<cr>", true),
+  Key:new("<leader>acb", "n", "Add current [B]uffer", "<cmd>ClaudeCodeAdd %<cr>", true),
+  Key:new("<leader>act", "n", "Add file from [T]ree", "<cmd>ClaudeCodeTreeAdd<cr>", true),
+  Key:new("<leader>acs", "v", "[S]end selection", "<cmd>ClaudeCodeSend<cr>", true),
+  Key:new("<leader>aca", "n", "[A]ccept diff", "<cmd>ClaudeCodeDiffAccept<cr>", true),
+  Key:new("<leader>acd", "n", "[D]eny diff", "<cmd>ClaudeCodeDiffDeny<cr>", true),
+})
