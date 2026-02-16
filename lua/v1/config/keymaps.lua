@@ -23,10 +23,10 @@ Keymaps:load({
   Key:new("WW", "n", "Save file", ":w<CR>", true),
 
   -- Movement
-  Key:new("<C-h>", "n", "Move to the left window", "<cmd>TmuxNavigateLeft<CR>", true),
-  Key:new("<C-j>", "n", "Move to the bottom window", "<cmd>TmuxNavigateDown<CR>", true),
-  Key:new("<C-k>", "n", "Move to the top window", "<cmd>TmuxNavigateUp<CR>", true),
-  Key:new("<C-l>", "n", "Move to the right window", "<cmd>TmuxNavigateRight<CR>", true),
+  Key:new("<C-h>", { "n", "t" }, "Move to the left window", "<cmd>TmuxNavigateLeft<CR>", true),
+  Key:new("<C-j>", { "n", "t" }, "Move to the bottom window", "<cmd>TmuxNavigateDown<CR>", true),
+  Key:new("<C-k>", { "n", "t" }, "Move to the top window", "<cmd>TmuxNavigateUp<CR>", true),
+  Key:new("<C-l>", { "n", "t" }, "Move to the right window", "<cmd>TmuxNavigateRight<CR>", true),
 
   -- Finds
   Key:new("<leader>fi", "n", "[F]ind [I]cons", Find:icons()),
