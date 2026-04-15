@@ -37,30 +37,8 @@ return {
         end,
       })
 
-      -- Make hover window have borders
-      local border = {
-        { "╭", "FloatBorder" },
-        { "─", "FloatBorder" },
-        { "╮", "FloatBorder" },
-        { "│", "FloatBorder" },
-        { "╯", "FloatBorder" },
-        { "─", "FloatBorder" },
-        { "╰", "FloatBorder" },
-        { "│", "FloatBorder" },
-      }
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = border,
-        max_width = 80,
-        max_height = 20,
-      })
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = border,
-      })
-
       vim.diagnostic.config({
-        float = { border = border },
+        float = { border = "rounded" },
       })
 
       -- Show window/showMessage requests using vim.notify instead of logging to messages

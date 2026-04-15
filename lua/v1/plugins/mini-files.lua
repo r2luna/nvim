@@ -86,8 +86,9 @@ return {
       -- I swapped the following 2 (default go_out: h)
       -- go_out_plus: when you go out, it shows you only 1 item to the right
       -- go_out: shows you all the items to the right
-      go_out = "H",
-      go_out_plus = "h",
+      -- Disabled here — custom keymaps with root boundary check are set via autocmd below
+      go_out = "",
+      go_out_plus = "",
 
       -- Default <BS>
       reset = "<BS>",
@@ -191,10 +192,166 @@ return {
     vim.api.nvim_set_hl(0, "MiniFilesNormal", { fg = gray })
 
     -- -------------------------------------------------------------------------------------------
+    -- Git status highlights
+
+    -- Colors for git status
+    vim.api.nvim_set_hl(0, "MiniFilesGitAdded", { fg = "#a6e3a1" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitModified", { fg = "#f9e2af" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitDeleted", { fg = "#f38ba8" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitUntracked", { fg = "#a6e3a1", italic = true })
+
+    local ns_git = vim.api.nvim_create_namespace("mini_files_git")
+
+    local git_status_map = {
+      [" M"] = "MiniFilesGitModified",
+      ["M "] = "MiniFilesGitModified",
+      ["MM"] = "MiniFilesGitModified",
+      ["A "] = "MiniFilesGitAdded",
+      ["AM"] = "MiniFilesGitAdded",
+      ["??"] = "MiniFilesGitUntracked",
+      ["D "] = "MiniFilesGitDeleted",
+      [" D"] = "MiniFilesGitDeleted",
+      ["R "] = "MiniFilesGitModified",
+      ["UU"] = "MiniFilesGitModified",
+    }
+
+    --- Get git status for files in the given directory
+    local function get_git_status(cwd)
+      local result = {}
+      local cmd = { "git", "-C", cwd, "status", "--short", "--porcelain", "-uall" }
+      local ok, output = pcall(vim.fn.system, cmd)
+      if not ok or vim.v.shell_error ~= 0 then
+        return result
+      end
+      local git_root_cmd = { "git", "-C", cwd, "rev-parse", "--show-toplevel" }
+      local git_root = vim.fn.system(git_root_cmd):gsub("\n$", "")
+      for _, line in ipairs(vim.split(output, "\n", { trimempty = true })) do
+        local status = line:sub(1, 2)
+        local file = line:sub(4)
+        -- Handle renames: "R  old -> new"
+        local rename_target = file:match("-> (.+)$")
+        if rename_target then
+          file = rename_target
+        end
+        local abs_path = git_root .. "/" .. file
+        local hl = git_status_map[status]
+        if hl then
+          result[abs_path] = hl
+          -- Also mark parent directories
+          local dir = vim.fn.fnamemodify(abs_path, ":h")
+          while dir ~= git_root and #dir > #git_root do
+            if not result[dir] then
+              result[dir] = hl
+            end
+            dir = vim.fn.fnamemodify(dir, ":h")
+          end
+        end
+      end
+      return result
+    end
+
+    local cached_git_status = {}
+
+    local function apply_git_highlights(buf_id)
+      if not vim.api.nvim_buf_is_valid(buf_id) then
+        return
+      end
+      vim.api.nvim_buf_clear_namespace(buf_id, ns_git, 0, -1)
+      local lines = vim.api.nvim_buf_get_lines(buf_id, 0, -1, false)
+      for i, line in ipairs(lines) do
+        -- mini.files lines have the format: "icon name"
+        -- We need to find the entry path for this line
+        local ok, entry = pcall(require("mini.files").get_fs_entry, buf_id, i)
+        if ok and entry then
+          local hl = cached_git_status[entry.path]
+          -- For directories, also check if trailing slash variant exists
+          if not hl and entry.fs_type == "directory" then
+            hl = cached_git_status[entry.path .. "/"]
+          end
+          if hl then
+            vim.api.nvim_buf_set_extmark(buf_id, ns_git, i - 1, 0, {
+              line_hl_group = hl,
+              priority = 1,
+            })
+          end
+        end
+      end
+    end
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesExplorerOpen",
+      callback = function()
+        local cwd = vim.uv.cwd() or "."
+        cached_git_status = get_git_status(cwd)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = { "MiniFilesBufferCreate", "MiniFilesBufferUpdate" },
+      callback = function(args)
+        if args.data and args.data.buf_id then
+          vim.schedule(function()
+            apply_git_highlights(args.data.buf_id)
+          end)
+        end
+      end,
+    })
+
+    -- -------------------------------------------------------------------------------------------
     -- Adjust width when opening mini.files
     vim.api.nvim_create_autocmd("User", {
       pattern = { "MiniFilesWindowOpen", "MiniFilesWindowUpdate" },
       callback = _mini_files_adjust_width,
+    })
+
+    -- -------------------------------------------------------------------------------------------
+    -- Prevent navigation above project root (git root or cwd)
+
+    local function get_project_root()
+      local ok, root = pcall(vim.fn.system, { "git", "rev-parse", "--show-toplevel" })
+      if ok and vim.v.shell_error == 0 then
+        return root:gsub("\n$", "")
+      end
+      return vim.uv.cwd() or "."
+    end
+
+    local function at_root_boundary()
+      local state = require("mini.files").get_explorer_state()
+      if state == nil then
+        return false
+      end
+      if state.depth_focus == 1 then
+        local root = get_project_root()
+        local current = state.branch[1]
+        if current == root or not vim.startswith(current, root) then
+          return true
+        end
+      end
+      return false
+    end
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesBufferCreate",
+      callback = function(args)
+        local buf_id = args.data.buf_id
+
+        -- h = go_out_plus (go out + trim right) with root boundary
+        vim.keymap.set("n", "h", function()
+          if at_root_boundary() then
+            return
+          end
+          require("mini.files").go_out()
+          require("mini.files").trim_right()
+        end, { buffer = buf_id, nowait = true })
+
+        -- H = go_out (go out, keep right columns) with root boundary
+        vim.keymap.set("n", "H", function()
+          if at_root_boundary() then
+            return
+          end
+          require("mini.files").go_out()
+        end, { buffer = buf_id, nowait = true })
+      end,
     })
   end,
 }

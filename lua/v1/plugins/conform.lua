@@ -59,7 +59,7 @@ return {
       yaml = { "prettier" },
       markdown = { "prettier" },
       html = { "prettier" },
-      blade = { "prettier" },
+      blade = { "pint" },
       css = { "prettier" },
       scss = { "prettier" },
 

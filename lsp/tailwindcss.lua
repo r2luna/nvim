@@ -27,6 +27,12 @@ return {
   },
   settings = {
     tailwindCSS = {
+      files = {
+        exclude = {
+          "**/vendor/**",
+          "**/node_modules/**",
+        },
+      },
       emmetCompletions = true,
       validate = true,
       lint = {
