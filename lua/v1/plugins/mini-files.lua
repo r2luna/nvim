@@ -195,10 +195,10 @@ return {
     -- Git status highlights
 
     -- Colors for git status
-    vim.api.nvim_set_hl(0, "MiniFilesGitAdded", { fg = "#a6e3a1" })
-    vim.api.nvim_set_hl(0, "MiniFilesGitModified", { fg = "#f9e2af" })
-    vim.api.nvim_set_hl(0, "MiniFilesGitDeleted", { fg = "#f38ba8" })
-    vim.api.nvim_set_hl(0, "MiniFilesGitUntracked", { fg = "#a6e3a1", italic = true })
+    vim.api.nvim_set_hl(0, "MiniFilesGitAdded", { fg = "#81a1c1" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitModified", { fg = "#ebcb8b" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitDeleted", { fg = "#bf616a" })
+    vim.api.nvim_set_hl(0, "MiniFilesGitUntracked", { fg = "#81a1c1" })
 
     local ns_git = vim.api.nvim_create_namespace("mini_files_git")
 
