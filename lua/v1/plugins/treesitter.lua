@@ -28,58 +28,62 @@ return {
     branch = "main",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
+      local select = require("nvim-treesitter-textobjects.select")
+      local move = require("nvim-treesitter-textobjects.move")
+      local swap = require("nvim-treesitter-textobjects.swap")
+
       require("nvim-treesitter-textobjects").setup({
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["aa"] = { query = "@attribute.outer", desc = "around an attribute" },
-            ["ia"] = { query = "@attribute.inner", desc = "inside an attribute" },
-            ["af"] = { query = "@function.outer", desc = "around a function" },
-            ["if"] = { query = "@function.inner", desc = "inner part of a function" },
-            ["ac"] = { query = "@class.outer", desc = "around a class" },
-            ["ic"] = { query = "@class.inner", desc = "inner part of a class" },
-            ["ai"] = { query = "@conditional.outer", desc = "around an if statement" },
-            ["ii"] = { query = "@conditional.inner", desc = "inner part of an if statement" },
-            ["al"] = { query = "@loop.outer", desc = "around a loop" },
-            ["il"] = { query = "@loop.inner", desc = "inner part of a loop" },
-            ["ap"] = { query = "@parameter.outer", desc = "around parameter" },
-            ["ip"] = { query = "@parameter.inner", desc = "inside a parameter" },
-          },
-          selection_modes = {
-            ["@parameter.outer"] = "v",
-            ["@parameter.inner"] = "v",
-            ["@function.outer"] = "v",
-            ["@conditional.outer"] = "V",
-            ["@loop.outer"] = "V",
-            ["@class.outer"] = "<c-v>",
-          },
-          include_surrounding_whitespace = false,
-        },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_previous_start = {
-            ["[f"] = { query = "@function.outer", desc = "Previous function" },
-            ["[c"] = { query = "@class.outer", desc = "Previous class" },
-            ["[p"] = { query = "@parameter.inner", desc = "Previous parameter" },
-          },
-          goto_next_start = {
-            ["]f"] = { query = "@function.outer", desc = "Next function" },
-            ["]c"] = { query = "@class.outer", desc = "Next class" },
-            ["]p"] = { query = "@parameter.inner", desc = "Next parameter" },
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>cnpi"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>cppi"] = "@parameter.inner",
-          },
-        },
+        select = { lookahead = true, include_surrounding_whitespace = false },
+        move = { set_jumps = true },
       })
+
+      -- Select text objects
+      local select_keymaps = {
+        ["aa"] = { "@attribute.outer", "around an attribute" },
+        ["ia"] = { "@attribute.inner", "inside an attribute" },
+        ["af"] = { "@function.outer", "around a function" },
+        ["if"] = { "@function.inner", "inner part of a function" },
+        ["ac"] = { "@class.outer", "around a class" },
+        ["ic"] = { "@class.inner", "inner part of a class" },
+        ["ai"] = { "@conditional.outer", "around an if statement" },
+        ["ii"] = { "@conditional.inner", "inner part of an if statement" },
+        ["al"] = { "@loop.outer", "around a loop" },
+        ["il"] = { "@loop.inner", "inner part of a loop" },
+        ["ap"] = { "@parameter.outer", "around parameter" },
+        ["ip"] = { "@parameter.inner", "inside a parameter" },
+      }
+
+      for key, mapping in pairs(select_keymaps) do
+        vim.keymap.set({ "x", "o" }, key, function()
+          select.select_textobject(mapping[1])
+        end, { desc = mapping[2] })
+      end
+
+      -- Move to next/previous
+      local move_keymaps = {
+        { "]f", "@function.outer", "next", "Next function" },
+        { "]c", "@class.outer", "next", "Next class" },
+        { "]p", "@parameter.inner", "next", "Next parameter" },
+        { "[f", "@function.outer", "prev", "Previous function" },
+        { "[c", "@class.outer", "prev", "Previous class" },
+        { "[p", "@parameter.inner", "prev", "Previous parameter" },
+      }
+
+      for _, m in ipairs(move_keymaps) do
+        local fn = m[3] == "next" and move.goto_next_start or move.goto_previous_start
+        vim.keymap.set({ "n", "x", "o" }, m[1], function()
+          fn(m[2])
+        end, { desc = m[4] })
+      end
+
+      -- Swap parameters
+      vim.keymap.set("n", "<leader>cnpi", function()
+        swap.swap_next("@parameter.inner")
+      end, { desc = "Swap next parameter" })
+
+      vim.keymap.set("n", "<leader>cppi", function()
+        swap.swap_previous("@parameter.inner")
+      end, { desc = "Swap previous parameter" })
     end,
   },
 }
