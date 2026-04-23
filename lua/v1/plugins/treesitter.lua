@@ -2,16 +2,25 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = {
+    config = function()
+      local ensure_installed = {
         "bash",
         "php",
+        "php_only",
+        "phpdoc",
         "go",
         "blade",
         "c",
         "diff",
         "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "json",
+        "yaml",
         "lua",
         "luadoc",
         "markdown",
@@ -19,9 +28,41 @@ return {
         "query",
         "vim",
         "vimdoc",
-      },
-      auto_install = true,
-    },
+      }
+
+      local nts = require("nvim-treesitter")
+      local installed = nts.get_installed("parsers")
+      local installed_set = {}
+      for _, p in ipairs(installed) do
+        installed_set[p] = true
+      end
+      local missing = {}
+      for _, p in ipairs(ensure_installed) do
+        if not installed_set[p] then
+          table.insert(missing, p)
+        end
+      end
+      if #missing > 0 then
+        nts.install(missing)
+      end
+
+      -- blade filetype detection for .blade.php files
+      vim.filetype.add({
+        pattern = {
+          [".*%.blade%.php"] = "blade",
+        },
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(ev)
+          local ok = pcall(vim.treesitter.start, ev.buf)
+          if not ok then
+            return
+          end
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
