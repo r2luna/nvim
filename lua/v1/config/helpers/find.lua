@@ -128,3 +128,64 @@ function Find:notifications()
     vim.cmd("Telescope notify theme=ivy")
   end
 end
+
+function Find:find_git_changes()
+  return function()
+    local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+    if not git_root or git_root == "" or vim.v.shell_error ~= 0 then
+      vim.notify("Not in a git repository", vim.log.levels.WARN)
+      return
+    end
+    local changed = vim.fn.systemlist("git -C " .. vim.fn.shellescape(git_root) .. " diff --name-only HEAD")
+    local untracked =
+      vim.fn.systemlist("git -C " .. vim.fn.shellescape(git_root) .. " ls-files --others --exclude-standard")
+    local files = {}
+    for _, f in ipairs(changed) do
+      table.insert(files, git_root .. "/" .. f)
+    end
+    for _, f in ipairs(untracked) do
+      table.insert(files, git_root .. "/" .. f)
+    end
+    if #files == 0 then
+      vim.notify("No git changes", vim.log.levels.INFO)
+      return
+    end
+
+    require("telescope.pickers")
+      .new(themes.get_ivy(), {
+        prompt_title = "Find in Git Changes (" .. #files .. " files)",
+        finder = require("telescope.finders").new_table({
+          results = files,
+          entry_maker = function(entry)
+            return {
+              value = entry,
+              display = vim.fn.fnamemodify(entry, ":."),
+              ordinal = entry,
+              path = entry,
+            }
+          end,
+        }),
+        sorter = require("telescope.config").values.file_sorter({}),
+        previewer = require("telescope.config").values.file_previewer({}),
+      })
+      :find()
+  end
+end
+
+function Find:git_conflicts()
+  return function()
+    local conflicts = vim.fn.systemlist("git diff --name-only --diff-filter=U")
+    if #conflicts == 0 then
+      vim.notify("No merge conflicts", vim.log.levels.INFO)
+      return
+    end
+    require("telescope.pickers")
+      .new(themes.get_ivy(), {
+        prompt_title = "Git Conflicts",
+        finder = require("telescope.finders").new_table({ results = conflicts }),
+        sorter = require("telescope.config").values.generic_sorter({}),
+        previewer = require("telescope.config").values.file_previewer({}),
+      })
+      :find()
+  end
+end

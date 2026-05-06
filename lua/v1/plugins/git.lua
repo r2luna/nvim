@@ -144,11 +144,16 @@ return {
       },
     },
   },
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   event = "VeryLazy",
-  --   cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-  -- },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>gv", "<cmd>DiffviewOpen<cr>", desc = "Diff[v]iew Open" },
+      { "<leader>gV", "<cmd>DiffviewClose<cr>", desc = "Diff[V]iew Close" },
+      { "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview File [H]istory" },
+    },
+  },
   {
     "kdheepak/lazygit.nvim",
     lazy = true,

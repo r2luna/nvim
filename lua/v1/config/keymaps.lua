@@ -49,6 +49,8 @@ Keymaps:load({
   Key:new("<leader>fc", "n", "[F]ind [C]onfig files", Find:config_files()),
   Key:new("<leader><leader>", "n", "[,] Find existing buffers", Find:buffers()),
   Key:new("<leader>fm", "n", "[F]ind [M]essages", Find:notifications()),
+  Key:new("<leader>fx", "n", "[F]ind Git Conflicts", Find:git_conflicts()),
+  Key:new("<leader>fC", "n", "[F]ind in Git [C]hanges", Find:find_git_changes()),
 
   -- Todos
   Key:new("<leader>ft", "n", "[F]ind [T]odos, Fixmes, Hacks, ...", Find:todos()),
