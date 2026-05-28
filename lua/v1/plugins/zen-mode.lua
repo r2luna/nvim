@@ -1,3 +1,4 @@
+-- zen-mode: distraction-free centered editing with a clean minimal window
 return {
   "folke/zen-mode.nvim",
   dependencies = {

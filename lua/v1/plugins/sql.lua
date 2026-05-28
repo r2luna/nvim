@@ -1,3 +1,4 @@
+-- LazySql: in-editor database TUI for browsing and querying SQL databases
 return {
   "LostbBlizzard/lazysql.nvim",
   enabled = false,

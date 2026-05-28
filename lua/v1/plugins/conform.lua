@@ -1,9 +1,4 @@
--- ----------------------------------------------------------------------------------------------------------
--- Conform.nvim configuration file
--- Plugin URL: https://github.com/stevearc/conform.nvim
--- Description: A Neovim plugin for formatting code using external formatters.
--- ----------------------------------------------------------------------------------------------------------
-
+-- conform.nvim: runs external formatters (prettier, stylua, pint, gofmt, shfmt, etc.) on save and via <leader>cf
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },

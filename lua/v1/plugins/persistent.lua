@@ -1,3 +1,4 @@
+-- persistence: save and restore editing sessions (per directory and git branch)
 return {
   "folke/persistence.nvim",
   event = "BufReadPre",

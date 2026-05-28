@@ -1,3 +1,4 @@
+-- Obsidian: manage and navigate an Obsidian markdown vault from Neovim
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",

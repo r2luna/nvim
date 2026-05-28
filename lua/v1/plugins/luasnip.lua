@@ -1,3 +1,4 @@
+-- LuaSnip: snippet engine for expanding and navigating code snippets
 return {
   "L3MON4D3/LuaSnip",
   -- follow latest release.

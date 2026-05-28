@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | PHP Snippets (LuaSnip)
+-- +----------------------------------------------------------------------------
+-- |
+-- | Defines PHP snippets for scaffolding public ("met") and private ("pmet")
+-- | methods with name, params, return type and body placeholders.
+-- |
+-- +----------------------------------------------------------------------------
+
 local ls = require("luasnip")
 local fmta = require("luasnip.extras.fmt").fmta
 local s = ls.snippet

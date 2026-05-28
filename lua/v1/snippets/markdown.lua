@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | Markdown Snippets (LuaSnip)
+-- +----------------------------------------------------------------------------
+-- |
+-- | Defines markdown snippets: a todo checkbox item and date/time stamps that
+-- | expand to the current date and time.
+-- |
+-- +----------------------------------------------------------------------------
+
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node

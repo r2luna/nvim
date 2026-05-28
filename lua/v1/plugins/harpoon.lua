@@ -1,9 +1,4 @@
--- -----------------------------------------------------------------------------
--- Harpoon
--- https://github.com/ThePrimeagen/harpoon
--- Harpoon is a plugin that helps you navigate your projects with ease.
--- -----------------------------------------------------------------------------
-
+-- Harpoon (v2): mark and instantly jump between a curated set of frequently-used files
 return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",

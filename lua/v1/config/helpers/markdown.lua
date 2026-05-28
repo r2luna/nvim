@@ -1,3 +1,15 @@
+-- +----------------------------------------------------------------------------
+-- | Markdown Helper
+-- +----------------------------------------------------------------------------
+-- |
+-- | Markdown editing actions plus Obsidian integration. Provides todo
+-- | creation/navigation and a status-aware todo sorter that respects headers,
+-- | and a set of Obsidian helpers for moving notes to the zettelkasten, creating
+-- | notes with generated frontmatter, searching/grepping the vault and the usual
+-- | Obsidian commands (toggle checkbox, toc, template, follow link).
+-- |
+-- +----------------------------------------------------------------------------
+
 local obsidian_vault = "/Users/r2luna/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
 
 Markdown = {}
@@ -279,9 +291,15 @@ function Markdown:sort_todos()
   end
 end
 
--- ------------------------------------------------------------------------------
--- Obsidian-specific keymaps
--- ------------------------------------------------------------------------------
+-- +----------------------------------------------------------------------------
+-- | Obsidian-specific keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | Helpers scoped to the Obsidian vault: detecting whether the current file is
+-- | in the inbox, registering inbox-only keymaps, building note frontmatter from
+-- | the project path and creating/moving notes within the vault.
+-- |
+-- +----------------------------------------------------------------------------
 
 function Markdown:obsidian_move_to_zettelkasten()
   return function()

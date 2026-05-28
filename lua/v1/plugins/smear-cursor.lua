@@ -1,3 +1,4 @@
+-- smear-cursor: animated smear/trail effect when the cursor moves
 return {
   "sphamba/smear-cursor.nvim",
   enabled = false,

@@ -1,3 +1,4 @@
+-- Extras: showkeys (on-screen keypress display) and persistence.nvim (automatic session save/restore)
 return {
   {
     "nvchad/showkeys",

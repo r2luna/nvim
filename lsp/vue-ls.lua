@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Vue Language Server (vue-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for Vue single-file components. Resolves the TypeScript SDK
+-- | (preferring the project-local install, then the global one) and disables
+-- | hybrid mode so inlay hints work, while leaving TypeScript features to ts-ls.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 -- Function to get TypeScript SDK path (prefer local, fallback to global)

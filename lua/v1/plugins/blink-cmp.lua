@@ -1,3 +1,4 @@
+-- blink.cmp: fast autocompletion engine (LSP, snippets, buffer) with ghost text and signature help
 return {
   "saghen/blink.cmp",
   -- use a release tag to download pre-built binaries

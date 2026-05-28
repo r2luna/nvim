@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Autocommand: Autosave
+-- +----------------------------------------------------------------------------
+-- |
+-- | Automatically writes all buffers when leaving a buffer, losing focus, or
+-- | leaving a window. Skips special buffers such as prompts, nofile buffers,
+-- | and snacks/opencode input filetypes.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Automatically save the file on buffer leave, focus lost, window leave, or entering normal mode
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "WinLeave" }, {
   pattern = "*",

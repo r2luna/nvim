@@ -1,3 +1,4 @@
+-- Twilight: dims inactive code so only the current section stays in focus
 return {
   "folke/twilight.nvim",
   opts = {

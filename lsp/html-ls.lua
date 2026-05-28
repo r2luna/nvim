@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | HTML Language Server (vscode-html-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for HTML and JSX-like filetypes (html, blade, javascriptreact,
+-- | typescriptreact, svelte). Enables the built-in formatter; roots on
+-- | index.html / .git.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 return {

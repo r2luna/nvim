@@ -1,3 +1,4 @@
+-- glow.nvim: renders markdown previews in a floating window via the glow CLI (<leader>mg)
 return {
   "ellisonleao/glow.nvim",
   enable = false,

@@ -1,3 +1,4 @@
+-- mini.starter: dashboard/start screen shown on launch with no file arguments
 return {
   "nvim-mini/mini.starter",
   enabled = false,

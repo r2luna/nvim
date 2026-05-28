@@ -1,3 +1,4 @@
+-- Telescope: fuzzy finder for files/grep, plus frecency and nerdy icon picker extensions
 return {
   {
     "nvim-telescope/telescope.nvim",

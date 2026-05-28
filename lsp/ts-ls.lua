@@ -1,3 +1,14 @@
+-- +----------------------------------------------------------------------------
+-- | TypeScript Language Server (typescript-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for JavaScript/TypeScript (and their JSX/TSX variants). Disables
+-- | the syntax-only server and enables a full set of inlay hints (parameter
+-- | names, types, return types, enum values). Roots on tsconfig/jsconfig/
+-- | package.json / .git.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 return {

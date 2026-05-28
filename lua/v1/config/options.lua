@@ -1,3 +1,21 @@
+-- +----------------------------------------------------------------------------
+-- | Editor Options
+-- +----------------------------------------------------------------------------
+-- |
+-- | Sets the global editor options and behaviors: leader key, indentation,
+-- | line numbers, search, splits, clipboard, folding, and window appearance.
+-- |
+-- +----------------------------------------------------------------------------
+
+-- +----------------------------------------------------------------------------
+-- | Leader & Indentation
+-- +----------------------------------------------------------------------------
+-- |
+-- | Defines the leader key and how indentation behaves (spaces over tabs, with
+-- | a four-space width and smart/auto indenting).
+-- |
+-- +----------------------------------------------------------------------------
+
 vim.g.mapleader = ","
 
 vim.opt.expandtab = true -- Convert tabs to spaces
@@ -5,12 +23,30 @@ vim.opt.shiftwidth = 4 -- Amount to indent with << and >>
 vim.opt.tabstop = 4 -- How many spaces are shown per Tab
 vim.opt.softtabstop = 4 -- How many spaces are applied when pressing Tab
 
+-- +----------------------------------------------------------------------------
+-- | Files & Editing Behavior
+-- +----------------------------------------------------------------------------
+-- |
+-- | Controls file reloading, indentation aids, persistent undo, mouse support,
+-- | and the status/mode display.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Auto-reload arquivos quando mudarem externamente (útil para Docker)
 vim.opt.autoread = true
 
 vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true -- Keep identation from previous line
+
+-- +----------------------------------------------------------------------------
+-- | UI & Appearance
+-- +----------------------------------------------------------------------------
+-- |
+-- | Line numbers, cursor line, sign column, command-line height, whitespace
+-- | rendering, and live substitution preview.
+-- |
+-- +----------------------------------------------------------------------------
 
 -- Always show relative line numbers
 vim.opt.number = true
@@ -69,6 +105,15 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Setup conceallevel for markdown files
 vim.o.conceallevel = 2
+
+-- +----------------------------------------------------------------------------
+-- | Folding & Window Border
+-- +----------------------------------------------------------------------------
+-- |
+-- | Configures Treesitter-based folding (including a custom fold text function)
+-- | and gives floating/window borders a rounded style.
+-- |
+-- +----------------------------------------------------------------------------
 
 -- Folding
 vim.o.foldmethod = "expr"

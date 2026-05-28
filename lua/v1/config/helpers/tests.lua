@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Tests Helper (Neotest)
+-- +----------------------------------------------------------------------------
+-- |
+-- | Wraps neotest to expose test-running actions: toggle the summary, run the
+-- | whole suite/nearest test/current file/last run, stop, attach, open output
+-- | and toggle the output panel.
+-- |
+-- +----------------------------------------------------------------------------
+
 local test = require("neotest")
 
 Tests = {}

@@ -1,3 +1,4 @@
+-- Treesitter: syntax parsing/highlighting plus textobjects for selecting/moving/swapping
 return {
   {
     "nvim-treesitter/nvim-treesitter",

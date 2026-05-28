@@ -1,3 +1,4 @@
+-- todo-comments: highlight and search TODO/FIX/NOTE comments across the project
 return {
   "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },

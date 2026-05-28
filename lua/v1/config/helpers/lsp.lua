@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | LSP Helper
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP navigation and editing actions: go to definition/declaration, list
+-- | references/implementations/type definitions and symbols via Telescope,
+-- | rename, code actions and toggling inlay hints per buffer.
+-- |
+-- +----------------------------------------------------------------------------
+
 local themes = require("telescope.themes")
 
 LSP = {}

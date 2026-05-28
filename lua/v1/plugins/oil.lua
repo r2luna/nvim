@@ -1,3 +1,4 @@
+-- Oil: edit the filesystem like a normal buffer
 return {
   "stevearc/oil.nvim",
   enabled = false,

@@ -1,3 +1,14 @@
+-- +----------------------------------------------------------------------------
+-- | Tailwind CSS Language Server (tailwindcss-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for Tailwind across JS/TS/Vue/Svelte/HTML/Blade/PHP/CSS files.
+-- | Excludes vendor/node_modules, enables Emmet and validation, tunes lint
+-- | rules, lists the class attributes to scan and adds experimental regexes to
+-- | detect classes in tw``, @apply, class/className/:class and Laravel @class.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 return {

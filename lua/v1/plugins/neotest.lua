@@ -1,3 +1,4 @@
+-- Neotest: test runner UI with PHPUnit and Pest adapters and pass/fail notifications
 return {
   {
     "nvim-neotest/neotest",

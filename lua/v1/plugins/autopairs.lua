@@ -1,9 +1,4 @@
--- -----------------------------------------------------------------------------
--- Autopairs
--- https://github.com/windwp/nvim-autopairs
--- Autopairs is a plugin that automatically inserts and deletes pairs of characters.
--- -----------------------------------------------------------------------------
-
+-- nvim-autopairs: automatically inserts and deletes matching brackets/quotes as you type
 return {
   "windwp/nvim-autopairs",
   event = "InsertEnter",

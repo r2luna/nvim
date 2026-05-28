@@ -1,3 +1,4 @@
+-- Alpha: customizable startup dashboard/greeter shown when opening Neovim with no file (currently disabled)
 return {
   "goolord/alpha-nvim",
   enabled = false,

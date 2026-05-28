@@ -1,3 +1,4 @@
+-- LSP: nvim-lspconfig + Mason auto-install of servers/tools, lazydev for config, and Laravel support
 return {
   {
     "neovim/nvim-lspconfig",

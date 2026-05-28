@@ -1,8 +1,24 @@
+-- +----------------------------------------------------------------------------
+-- | Keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | Central place for all key mappings. Uses the custom `Keymaps`/`Key` helpers
+-- | for the main set, plus raw `vim.keymap.set` calls and autocommands for
+-- | context-specific bindings (LSP attach, markdown buffers, Claude Code).
+-- |
+-- +----------------------------------------------------------------------------
+
 require("v1.config.helpers.init")
 
--- -----------------------------------------------------------------------------------------------
--- General Keymaps
--- -----------------------------------------------------------------------------------------------
+-- +----------------------------------------------------------------------------
+-- | General Keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | The primary mapping table, grouped inline by purpose: diagnostics,
+-- | navigation, movement, finds, todos, testing, buffers, UI toggles, Flash
+-- | search, Obsidian notes, and Harpoon.
+-- |
+-- +----------------------------------------------------------------------------
 
 Keymaps:load({
 
@@ -107,6 +123,15 @@ Keymaps:load({
   Key:new("<space>t", "n", "[H]arpoon [5]th Select", Harpoon:select(5)),
 })
 
+-- +----------------------------------------------------------------------------
+-- | Insert/Visual Mode Mappings
+-- +----------------------------------------------------------------------------
+-- |
+-- | Raw mappings for word deletion, exiting insert mode with jj/jk (skipped in
+-- | input-style buffers), and keeping the selection after indenting.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Delete word in insert/visual mode
 for _, mode in ipairs({ "i", "x" }) do
   vim.keymap.set(mode, "<C-BS>", "<C-w>", { silent = true })
@@ -130,9 +155,15 @@ end
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- ------------------------------------------------------------------------------
--- Load keys when LSP is attached
--- ------------------------------------------------------------------------------
+-- +----------------------------------------------------------------------------
+-- | LSP Keymaps (on attach)
+-- +----------------------------------------------------------------------------
+-- |
+-- | Buffer-local LSP mappings registered when a language server attaches: goto
+-- | definition/declaration/references/implementation, rename, code action, and
+-- | inlay-hint toggling. Also removes conflicting default `gr*` mappings.
+-- |
+-- +----------------------------------------------------------------------------
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("keymaps-lsp-attach", { clear = true }),
   callback = function(event)
@@ -160,10 +191,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
----------------------------------------------------------------------------------------------------
--- Markdown / Obsidian specific keymaps
--- Only load when a markdown file is opened
----------------------------------------------------------------------------------------------------
+-- +----------------------------------------------------------------------------
+-- | Markdown / Obsidian Keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | Mappings loaded only when a markdown (*.md) file is opened: todo handling,
+-- | Obsidian checkbox/TOC/template/link actions, and an inbox-only mapping to
+-- | move a note into the Zettelkasten.
+-- |
+-- +----------------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*.md",
   callback = function()
@@ -189,9 +225,15 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
----------------------------------------------------------------------------------------------------
--- Claude Code
----------------------------------------------------------------------------------------------------
+-- +----------------------------------------------------------------------------
+-- | Claude Code Keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | Mappings for the Claude Code integration: toggle/focus/resume/continue the
+-- | session, select a model, add buffers or tree files to context, send a
+-- | selection, and accept or deny proposed diffs.
+-- |
+-- +----------------------------------------------------------------------------
 Keymaps:load({
   Key:new("<leader>acc", "n", "Toggle [C]laude", "<cmd>ClaudeCode<cr>", true),
   Key:new("<leader>acf", "n", "[F]ocus Claude", "<cmd>ClaudeCodeFocus<cr>", true),

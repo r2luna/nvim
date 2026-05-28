@@ -1,3 +1,4 @@
+-- PhpTools: PHP helpers for generating methods, classes, namespaces, and refactoring
 return {
   "ccaglak/phptools.nvim",
   enabled = true,

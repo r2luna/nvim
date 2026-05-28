@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | AI Helper
+-- +----------------------------------------------------------------------------
+-- |
+-- | Thin wrappers around the opencode plugin exposing actions to toggle the AI
+-- | panel and to ask it questions, returned as functions for use in keymaps.
+-- |
+-- +----------------------------------------------------------------------------
+
 AI = {}
 AI.__index = AI
 

@@ -1,3 +1,4 @@
+-- Git suite: gitsigns (hunks/blame), diffview, lazygit, and fugitive/rhubarb for full Git workflow
 return {
   {
     "lewis6991/gitsigns.nvim",

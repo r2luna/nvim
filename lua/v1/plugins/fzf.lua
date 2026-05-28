@@ -1,3 +1,4 @@
+-- fzf-lua: fuzzy finder for files/buffers/grep with frecency, plus a custom directory picker
 return {
   "ibhagwan/fzf-lua",
   enable = false,

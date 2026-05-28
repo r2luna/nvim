@@ -1,3 +1,4 @@
+-- mini.files: file explorer with custom icons, git status, and tmux integration
 -- ------------------------------------------------------------------------------------
 -- Change file icons based on extension
 

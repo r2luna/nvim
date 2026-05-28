@@ -1,3 +1,14 @@
+-- +----------------------------------------------------------------------------
+-- | PHP Filetype Settings
+-- +----------------------------------------------------------------------------
+-- |
+-- | Buffer-local PHP setup: treat "$" as a keyword char (so completion doesn't
+-- | double the sign) and use 4-space indentation. Also adds a Laravel-aware
+-- | command to open/create the matching Pest test file for the current source
+-- | file, mapped to <leader>lt.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Needed for phpactor lsp, to not create double $ sign on keyword autocomplete
 vim.opt_local.iskeyword:append("$")
 vim.opt.tabstop = 4

@@ -1,3 +1,4 @@
+-- Database clients: nvim-dbee (active) for running queries/browsing DBs, plus dadbod-ui (disabled)
 return {
   {
     "kndndrj/nvim-dbee",

@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Utility Helpers
+-- +----------------------------------------------------------------------------
+-- |
+-- | Small shared helper functions for working with highlight groups: reading a
+-- | color attribute from an existing group, and creating a new group by copying
+-- | a base group and applying overrides.
+-- |
+-- +----------------------------------------------------------------------------
+
 local M = {}
 
 -- Load color from highlight colors and return as hex

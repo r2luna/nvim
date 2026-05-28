@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Command: Trim Whitespace
+-- +----------------------------------------------------------------------------
+-- |
+-- | Registers the `:TrimWhitespace` command, which strips trailing whitespace
+-- | from every line in the current buffer (preserving a trailing empty line if
+-- | present).
+-- |
+-- +----------------------------------------------------------------------------
+
 vim.api.nvim_create_user_command("TrimWhitespace", function()
   local bufnr = vim.api.nvim_get_current_buf()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)

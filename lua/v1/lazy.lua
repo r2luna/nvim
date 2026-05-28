@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | lazy.nvim Plugin Manager
+-- +----------------------------------------------------------------------------
+-- |
+-- | Bootstraps the lazy.nvim plugin manager (cloning it on first run) and then
+-- | initializes it, importing all plugin specs from the `v1.plugins` module.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

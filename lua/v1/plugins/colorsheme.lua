@@ -1,4 +1,15 @@
+-- Colorschemes: pinnord (active) + rose-pine, with auto-dark-mode toggling themes by system appearance
 return {
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      variant = "dawn",
+      dark_variant = "main",
+    },
+  },
   {
     "r2luna/pinnord.nvim",
     enabled = true,
@@ -13,6 +24,10 @@ return {
         vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
       end
     end,
   },
@@ -29,10 +44,23 @@ return {
         vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
         vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
       end,
       set_light_mode = function()
         vim.o.background = "light"
-        vim.cmd("colorscheme pinnord")
+        vim.cmd("colorscheme rose-pine-dawn")
+        vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
       end,
     },
   },

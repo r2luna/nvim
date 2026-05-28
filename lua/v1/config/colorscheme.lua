@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Colorscheme ("pinguim")
+-- +----------------------------------------------------------------------------
+-- |
+-- | Defines the custom "pinguim" colorscheme. It declares a Nord-inspired color
+-- | palette and applies it across editor UI, syntax, Treesitter, LSP, and a
+-- | wide range of plugin highlight groups.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Yukinord color scheme for Neovim
 -- Based on the VSCode theme inspired by Nord and Nord Deep
 ---@diagnostic disable: undefined-global
@@ -459,8 +469,8 @@ hl("MiniStatuslineFileinfo", { link = "StatusLine" })
 hl("MiniStatuslineInactive", { link = "StatusLine" })
 
 -- Winbar
-hl("WinBar", { fg = colors.fg2, bg = colors.bg0 })
-hl("WinBarNC", { fg = colors.fg3, bg = colors.bg0 })
+hl("WinBar", { fg = colors.fg2, bg = "NONE" })
+hl("WinBarNC", { fg = colors.fg3, bg = "NONE" })
 
 -- MatchParen
 hl("MatchParen", { fg = colors.cyan, bg = colors.blue_bright, blend = 80, bold = true })

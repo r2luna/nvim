@@ -1,3 +1,4 @@
+-- snacks: collection of QoL utilities (input, picker, terminal, indent guides)
 return {
   "folke/snacks.nvim",
   ---@type snacks.Config

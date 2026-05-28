@@ -1,3 +1,4 @@
+-- vim-visual-multi: multiple cursors for simultaneous multi-location editing
 return {
   "mg979/vim-visual-multi",
   event = "VeryLazy",

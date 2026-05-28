@@ -1,3 +1,14 @@
+-- +----------------------------------------------------------------------------
+-- | Find Helper (Telescope)
+-- +----------------------------------------------------------------------------
+-- |
+-- | Telescope-powered pickers exposed as keymap actions: file/buffer/old-file
+-- | finders, live grep, LSP symbols, todos, diagnostics, help, keymaps, icons,
+-- | notifications and custom pickers for git-changed files and merge conflicts.
+-- | Most pickers use the ivy theme.
+-- |
+-- +----------------------------------------------------------------------------
+
 local telescope = require("telescope.builtin")
 local themes = require("telescope.themes")
 
@@ -5,7 +16,10 @@ Find = {}
 Find.__index = Find
 function Find:files()
   return function()
-    telescope.find_files(themes.get_ivy())
+    telescope.find_files(themes.get_ivy({
+      hidden = true,
+      no_ignore = true,
+    }))
   end
 end
 

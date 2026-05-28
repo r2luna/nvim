@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | LSP Capabilities Inspector
+-- +----------------------------------------------------------------------------
+-- |
+-- | Registers the `:LspCapabilities` command, which prints the set of supported
+-- | capabilities for every LSP client attached to the current buffer.
+-- |
+-- +----------------------------------------------------------------------------
+
 local function check_lsp_capabilities()
   local bufnr = vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients({ bufnr = bufnr })

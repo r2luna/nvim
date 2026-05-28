@@ -1,3 +1,4 @@
+-- AI assistants: Supermaven (active) inline completion plus Claude Code, Copilot, and opencode integrations
 return {
   {
     "github/copilot.vim",

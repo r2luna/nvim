@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Lua Language Server (lua-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for Lua. Silences the "missing-fields" diagnostic, declares the
+-- | vim and Snacks globals, and enables type/inlay hints. Recognizes the usual
+-- | Lua project markers (.luarc, stylua, selene, .git).
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 return {
   cmd = { "lua-language-server" },

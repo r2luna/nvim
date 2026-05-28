@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Diagnostics Helper
+-- +----------------------------------------------------------------------------
+-- |
+-- | Actions for working with LSP diagnostics: showing the float, hovering,
+-- | toggling diagnostics on/off, navigating between them and toggling inline
+-- | virtual text.
+-- |
+-- +----------------------------------------------------------------------------
+
 Diagnostics = {}
 Diagnostics.__index = Diagnostics
 

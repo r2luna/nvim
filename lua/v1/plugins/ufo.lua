@@ -1,3 +1,4 @@
+-- nvim-ufo: modern code folding with treesitter/LSP and pretty fold previews
 return {
   "kevinhwang91/nvim-ufo",
   enabled = true,

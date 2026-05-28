@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Intelephense Language Server (PHP)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for PHP/Blade. Reads the premium licence key from
+-- | ~/.config/intelephense/license.txt and passes it via init_options; roots on
+-- | composer.json / .git.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 local get_intelephense_license = function()

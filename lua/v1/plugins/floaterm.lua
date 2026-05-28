@@ -1,3 +1,4 @@
+-- vim-floaterm: toggleable floating terminal windows, bound to <leader>.
 return {
   "voldikss/vim-floaterm",
   config = function()

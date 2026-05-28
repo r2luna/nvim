@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Harpoon Helper
+-- +----------------------------------------------------------------------------
+-- |
+-- | Wraps harpoon.nvim to manage the quick file list: setup, add the current
+-- | file, toggle the quick menu, select one of the first five marks and move to
+-- | the previous/next entry.
+-- |
+-- +----------------------------------------------------------------------------
+
 local harpoon = require("harpoon")
 
 Harpoon = {}

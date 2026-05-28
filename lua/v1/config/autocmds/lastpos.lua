@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Autocommand: Restore Last Cursor Position
+-- +----------------------------------------------------------------------------
+-- |
+-- | When opening a buffer, restores the cursor to the last edited position
+-- | (centering it when appropriate), while ignoring certain buftypes and
+-- | filetypes such as commit/rebase buffers.
+-- |
+-- +----------------------------------------------------------------------------
+
 -- Taken from https://github.com/neovim/neovim/issues/16339#issuecomment-1348133829
 -- adapted from https://github.com/ethanholz/nvim-lastplace/blob/main/lua/nvim-lastplace/init.lua
 local ignore_buftype = { "quickfix", "nofile", "help", "terminal" }

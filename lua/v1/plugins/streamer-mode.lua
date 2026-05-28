@@ -1,3 +1,4 @@
+-- Cloak: masks secrets in .env/config files (auto-toggles during screen sharing)
 return {
   "laytan/cloak.nvim",
   opts = {

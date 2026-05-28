@@ -1,3 +1,12 @@
+-- +----------------------------------------------------------------------------
+-- | CSS Language Server (vscode-css-language-server)
+-- +----------------------------------------------------------------------------
+-- |
+-- | LSP config for CSS/SCSS/LESS files. Enables validation for each dialect and
+-- | uses package.json / .git as root markers.
+-- |
+-- +----------------------------------------------------------------------------
+
 local blink = require("blink.cmp")
 
 return {

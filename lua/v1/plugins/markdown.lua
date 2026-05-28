@@ -1,10 +1,4 @@
--- -----------------------------------------------------------------------------
--- Render Markdown
--- https://github.com/MeanderingProgrammer/render-markdown.nvim
--- Render Markdown is a Neovim plugin that provides a simple way to render
--- Markdown files in Neovim.
--- -----------------------------------------------------------------------------
-
+-- render-markdown: renders Markdown inline in the buffer (headings, code, checkboxes)
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   enabled = false,

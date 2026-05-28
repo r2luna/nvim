@@ -1,3 +1,13 @@
+-- +----------------------------------------------------------------------------
+-- | Helper Bootstrap & Keymap Primitives
+-- +----------------------------------------------------------------------------
+-- |
+-- | Loads every helper module that backs the keymaps (tests, jumps, find, lsp,
+-- | ui, diagnostics, markdown, harpoon, flash) and defines the shared Key and
+-- | Keymaps classes used throughout the config to declare and register mappings.
+-- |
+-- +----------------------------------------------------------------------------
+
 require("v1.config.helpers.tests")
 require("v1.config.helpers.jumps")
 require("v1.config.helpers.find")
@@ -8,6 +18,15 @@ require("v1.config.helpers.markdown")
 require("v1.config.helpers.harpoon")
 -- require("v1.config.helpers.ai")
 require("v1.config.helpers.flash")
+
+-- +----------------------------------------------------------------------------
+-- | Key
+-- +----------------------------------------------------------------------------
+-- |
+-- | Lightweight value object describing a single keymap: its key, mode(s),
+-- | description, action (string or function) and whether it runs silently.
+-- |
+-- +----------------------------------------------------------------------------
 
 ---@class Key
 ---@field key string
@@ -33,6 +52,15 @@ function Key:new(key, mode, desc, action, silent)
     silent = silent or false,
   }
 end
+
+-- +----------------------------------------------------------------------------
+-- | Keymaps
+-- +----------------------------------------------------------------------------
+-- |
+-- | Registers a list of Key objects with Neovim by iterating the table and
+-- | calling vim.keymap.set for each entry.
+-- |
+-- +----------------------------------------------------------------------------
 
 Keymaps = {}
 Keymaps.__index = Keymaps

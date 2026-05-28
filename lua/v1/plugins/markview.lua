@@ -1,9 +1,4 @@
--- -----------------------------------------------------------------------------
--- Markview
--- https://github.com/OXY2DEV/markview.nvim
--- An experimental markdown previewer for Neovim using tree-sitter and extmarks.
--- -----------------------------------------------------------------------------
-
+-- Markview: in-buffer Markdown previewer using tree-sitter and extmarks
 return {
   "OXY2DEV/markview.nvim",
   lazy = false,

@@ -1,8 +1,44 @@
+-- lualine.nvim: statusline showing diagnostics, git diff, Laravel version, filetype, and active LSPs
 return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      local laravel_cache = {}
+      local function laravel_version(cwd)
+        if laravel_cache[cwd] ~= nil then
+          return laravel_cache[cwd]
+        end
+        if vim.fn.filereadable(cwd .. "/artisan") ~= 1 then
+          laravel_cache[cwd] = false
+          return false
+        end
+        local f = io.open(cwd .. "/composer.lock", "r")
+        if not f then
+          laravel_cache[cwd] = false
+          return false
+        end
+        local content = f:read("*a")
+        f:close()
+        local _, idx = content:find('"name":%s*"laravel/framework"')
+        local v = idx and content:sub(idx, idx + 200):match('"version":%s*"v?([%w%.%-]+)"')
+        laravel_cache[cwd] = v or false
+        return laravel_cache[cwd]
+      end
+      vim.api.nvim_create_autocmd("DirChanged", {
+        callback = function() laravel_cache = {} end,
+      })
+
+      local laravel = {
+        function()
+          local v = laravel_version(vim.fn.getcwd())
+          return v and ("󰫐 " .. v) or ""
+        end,
+        cond = function()
+          return laravel_version(vim.fn.getcwd()) ~= false
+        end,
+      }
+
       local lsp_status = {
         function()
           local msg = "No LSP"
@@ -108,9 +144,8 @@ return {
               --   removed = { fg = colors.red },
               -- },
             },
-            "encoding",
-            "fileformat",
-            "filetype",
+            laravel,
+            { "filetype", colored = false },
             lsp_status,
             "location",
           },
