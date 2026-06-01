@@ -18,6 +18,29 @@ function Find:files()
   return function()
     telescope.find_files(themes.get_ivy({
       hidden = true,
+      find_command = {
+        "rg",
+        "--files",
+        "--hidden",
+        "--glob",
+        "!.git/",
+        "--glob",
+        "!node_modules/",
+        "--glob",
+        "!vendor/",
+        "--glob",
+        ".env*",
+        "--glob",
+        "workspace/**",
+      },
+    }))
+  end
+end
+
+function Find:files_all()
+  return function()
+    telescope.find_files(themes.get_ivy({
+      hidden = true,
       no_ignore = true,
     }))
   end

@@ -61,6 +61,7 @@ Keymaps:load({
   Key:new("<leader>fS", "n", "[F]ind Workspace [S]ymbols", Find:lsp_workspace_symbols()),
   Key:new("<leader>fs", "n", "[F]ind Document [S]ymbols", Find:lsp_document_symbols()),
   Key:new("<leader>ff", "n", "[F]ind [F]iles", Find:files()),
+  Key:new("<leader>fF", "n", "[F]ind All [F]iles (incl. vendor/node_modules)", Find:files_all()),
   Key:new("<leader>fl", "n", "[F]ind [L]ivewire ⚡️ Files", Find:livewire_files()),
   Key:new("<leader>fc", "n", "[F]ind [C]onfig files", Find:config_files()),
   Key:new("<leader><leader>", "n", "[,] Find existing buffers", Find:buffers()),

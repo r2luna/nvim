@@ -12,7 +12,7 @@ return {
         },
       },
       defaults = {
-        file_ignore_patterns = { "node_modules", ".git/" },
+        file_ignore_patterns = { "node_modules/", "vendor/", ".git/" },
         initial_mode = "insert",
         default_text = "",
       },
