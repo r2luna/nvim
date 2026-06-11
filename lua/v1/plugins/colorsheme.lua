@@ -1,14 +1,13 @@
--- Colorschemes: pinnord (active) + rose-pine, with auto-dark-mode toggling themes by system appearance
+-- Colorschemes: pinnord (dark) + github_light_tritanopia (light), with auto-dark-mode toggling by system appearance
 return {
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
     lazy = false,
     priority = 1000,
-    opts = {
-      variant = "dawn",
-      dark_variant = "main",
-    },
+    config = function()
+      require("github-theme").setup({})
+    end,
   },
   {
     "r2luna/pinnord.nvim",
@@ -50,17 +49,10 @@ return {
         vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
       end,
       set_light_mode = function()
+        -- GitHub light (tritanopia) — paired with the matching Ghostty theme.
+        -- Opaque: no transparency overrides in light mode.
         vim.o.background = "light"
-        vim.cmd("colorscheme rose-pine-dawn")
-        vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+        vim.cmd("colorscheme github_light_tritanopia")
       end,
     },
   },
