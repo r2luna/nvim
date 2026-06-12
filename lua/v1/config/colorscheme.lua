@@ -33,7 +33,7 @@ local colors = {
   fg4 = "#616e88", -- editorLineNumber.foreground
 
   -- Border colors
-  border = "#3b4252", -- activityBar.border, editorGroup.border
+  border = "#D97A5A", -- activityBar.border, editorGroup.border (wallpaper moon coral)
 
   -- Accent colors
   cyan = "#88c0d0", -- keywords, activityBar.activeBorder
