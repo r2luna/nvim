@@ -35,11 +35,6 @@ return {
 
       notes_subdir = "inbox",
 
-      completion = {
-        nvim_cmp = false, -- if using nvim-cmp, otherwise set to false
-        blink = true,
-      },
-
       checkbox = {
         order = { " ", "x", "~", "!", ">" },
       },
